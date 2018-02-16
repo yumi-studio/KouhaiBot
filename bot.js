@@ -3,6 +3,7 @@ const client = new Discord.Client();
 const prefix = '!';
 client.on('ready', () => {
   console.log('I am ready!');
+  client.setActivity('w/ Yui-senpai');
 });
 
 client.on('message', message => {
@@ -24,6 +25,9 @@ client.on('message', message => {
 				if(num>1){
 					message.channel.send(opt[Math.floor(Math.random()*num)]);
 				}
+				return;
+			case 'quote':
+				var add = message.content.substring(0,2);
 				return;
 			default:
 				message.channel.send('Command not found');
