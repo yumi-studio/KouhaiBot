@@ -34,6 +34,7 @@ client.on('message', message => {
 						message.channel.send(obj[count].quote);
 						break;
 					}
+					count++;
 				}
 				return;
 			default:
