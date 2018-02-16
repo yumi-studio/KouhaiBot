@@ -26,7 +26,7 @@ client.on('message', message => {
 				}
 				return;
 			case 'quote':
-				var quote= require('quote.js');
+				var quote= require('quote.json');
 				var obj= JSON.parse(quote);
 				var count=0;
 				while(count!==obj.length){
