@@ -31,7 +31,7 @@ client.on('message', message => {
 				var count=0;
 				while(count!==obj.length){
 					if(obj[count].name===cmd[1]){
-						message.channel.send(obj[count].quote);
+						message.channel.send(obj[count].text);
 						break;
 					}
 					count++;
