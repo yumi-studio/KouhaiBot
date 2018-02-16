@@ -29,7 +29,7 @@ client.on('message', message => {
 				var quote= require('quote.js');
 				var obj= JSON.parse(quote);
 				var count=0;
-				message.channel.send(obj[0]);
+				message.channel.send(obj.test);
 				return;
 			default:
 				message.channel.send('Command not found');
