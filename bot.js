@@ -26,7 +26,10 @@ client.on('message', message => {
 				}
 				return;
 			case 'quote':
-				var add = message.content.substring(0,2);
+				var quote= require('quote.js');
+				var obj= JSON.parse(quote);
+				var count=0;
+				message.channel.send(obj[0]);
 				return;
 			default:
 				message.channel.send('Command not found');
