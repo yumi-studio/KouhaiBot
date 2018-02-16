@@ -1,3 +1,15 @@
-{
-	"test" : "this is a test quote"
-}
+[
+	{
+		"name":"test",
+		"text":"this is a test quote1"
+	},
+	{
+		"name":"test2",
+		"text":"this is a test quote2"
+	},
+	{
+		"name":"test3",
+		"text":"this is a test quote3"
+	},
+]
+
