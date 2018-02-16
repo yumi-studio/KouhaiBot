@@ -26,8 +26,8 @@ client.on('message', message => {
 				}
 				return;
 			case 'quote':
-				var quote= require('quote.json');
-				var obj= JSON.parse(quote);
+				var file = new File('quote.json');
+				var obj= JSON.parse(file);
 				var count=0;
 				while(count!==obj.length){
 					if(obj[count].name===cmd[1]){
