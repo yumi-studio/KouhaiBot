@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = '!';
-const token = 'NDEzMzg0OTM4OTY1MTcyMjU1.DWYCRA.wH7vKs1ldmRRA8woU2VRMtXGy08';
 client.on('ready', () => {
   console.log('I am ready!');
 });
@@ -22,10 +21,11 @@ client.on('message', message => {
 			case 'roll':
 				var opt = cmd[1].split('-');
 				var numOpt= opt.length;
+				
 				return;
 			default:
 				message.channel.send('Command not found');
 		}	
 	}
 });
-client.login(token);
+client.login(process.env.BOT_TOKEN);
