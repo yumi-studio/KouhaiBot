@@ -22,7 +22,7 @@ client.on('message', message => {
 				var opt = cmd[1].split('-');
 				var num= opt.length;
 				if(num>1){
-					message.channel.send(cmd[Math.floor(Math.random()*num)]);
+					message.channel.send(opt[Math.floor(Math.random()*num)]);
 				}
 				return;
 			default:
