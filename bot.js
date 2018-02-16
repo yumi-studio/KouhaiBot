@@ -9,6 +9,8 @@ client.on('message', message => {
 	if(message.content.substring(0,1) === prefix){
 		var cmd = message.content.substring(1,message.content.length).split(' ');
 		var em = new Discord.RichEmbed();
+		var canvas= document.getElementById('canvas');
+		var ctx = canvas.getContext('2d')
 		switch(cmd[0]){
 			case 'hhh':
 				em.setImage('https://i.imgur.com/ojjWsjK.jpg');
@@ -25,7 +27,7 @@ client.on('message', message => {
 					message.channel.send(opt[Math.floor(Math.random()*num)]);
 				}
 				return;
-			case 'quote':
+			/* case 'quote':
 				var file = new File('quote.json');
 				var obj= JSON.parse(file);
 				var count=0;
@@ -36,7 +38,13 @@ client.on('message', message => {
 					}
 					count++;
 				}
-				return;
+				return; */
+			case 'suck':
+				var pic = new Image();
+				pic.onload=function(){
+					ctx.drawImage(pic,0,0);
+				}
+				pic.src= 'https://i.imgur.com/ZZn9DUa.png';
 			default:
 				message.channel.send('Command not found');
 		}	
