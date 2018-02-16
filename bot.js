@@ -20,8 +20,10 @@ client.on('message', message => {
 				return;
 			case 'roll':
 				var opt = cmd[1].split('-');
-				var numOpt= opt.length;
-				
+				var num= opt.length;
+				if(num>1){
+					message.channel.send(cmd[Math.floor(Math.random()*num)]);
+				}
 				return;
 			default:
 				message.channel.send('Command not found');
