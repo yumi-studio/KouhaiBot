@@ -3,7 +3,6 @@ const client = new Discord.Client();
 const prefix = '!';
 client.on('ready', () => {
   console.log('I am ready!');
-  client.setActivity('w/ Yui-senpai');
 });
 
 client.on('message', message => {
