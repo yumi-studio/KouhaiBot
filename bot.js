@@ -65,8 +65,6 @@ client.on('message', message => {
 				message.channel.send(em);
 				return;
 			case 'avatar':
-				em.setThumbnail(sender.avatarUrl);
-				message.channel.send(em);
 				message.channel.send(sender.avatarUrl);
 				return;
 			default:
