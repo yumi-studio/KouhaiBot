@@ -27,24 +27,19 @@ client.on('message', message => {
 					message.channel.send(opt[Math.floor(Math.random()*num)]);
 				}
 				return;
-			/* case 'quote':
-				var file = new File('quote.json');
-				var obj= JSON.parse(file);
+			case 'quote':
+				var file = require('./quote.json');
 				var count=0;
-				while(count!==obj.length){
-					if(obj[count].name===cmd[1]){
+				while(count!==file.length){
+					if(file[count].name===cmd[1]){
 						message.channel.send(obj[count].text);
 						break;
 					}
 					count++;
 				}
-				return; */
+				return;
 			case 'suck':
-				var pic = new Image();
-				pic.onload=function(){
-					ctx.drawImage(pic,0,0);
-				}
-				pic.src= 'https://i.imgur.com/ZZn9DUa.png';
+				
 			default:
 				message.channel.send('Command not found');
 		}	
