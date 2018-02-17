@@ -30,7 +30,7 @@ client.on('message', message => {
 				var count=0;
 				while(count!==file.length){
 					if(file[count].name===cmd[1]){
-						message.channel.send(obj[count].text);
+						message.channel.send(file[count].text);
 						break;
 					}
 					count++;
