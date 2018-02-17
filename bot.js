@@ -1,8 +1,10 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const fs = require('fs')
 const prefix = '!';
 client.on('ready', () => {
-  console.log('I am ready!');
+	client.user.setActivity('Yui-senpai with love');
+	console.log('I am ready!');
 });
 
 client.on('message', message => {
