@@ -44,7 +44,7 @@ client.on('message', message => {
 				if(cmd.length === 1){
 					message.channel.send('Please tag someone with ```@username```');
 				}else{
-					message.channel.send(message.mentions.users[0].id);
+					message.channel.send(message.mentions.users.first().id);
 				}
 			default:
 				message.channel.send('Command not found');
