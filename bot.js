@@ -5,7 +5,6 @@ const prefix = '!';
 const bossId = process.env.BOSS_ID;
 client.on('ready', () => {
 	client.user.setActivity('Yui-senpai with love');
-	client.user.set
 	console.log('I am ready!');
 });
 
