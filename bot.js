@@ -42,7 +42,7 @@ client.on('message', message => {
 				}
 				return; */
 			case 'abcdef':
-				if(sender.id!==boss.id){
+				if(sender.id!==bossId){
 					message.channel.send('you dont have enough permission.');
 					return;
 				}
