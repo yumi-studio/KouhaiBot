@@ -30,7 +30,7 @@ client.on('message', message => {
 					message.channel.send(opt[Math.floor(Math.random()*num)]);
 				}
 				return;
-			case 'quote':
+			/* case 'quote':
 				var file = require('./quote.json');
 				var count=0;
 				while(count!==file.length){
@@ -40,20 +40,13 @@ client.on('message', message => {
 					}
 					count++;
 				}
-				return;
-			case 'test':
-				if(sender.id === bossId){
-					message.channel.send('Test done!');
-				}else{
-					message.channel.send('Test failed!')
+				return; */
+			case 'abcdef':
+				if(sender.id!==boss.id){
+					message.channel.send('you dont have enough permission.');
+					return;
 				}
-				return;
-			case 'show':
-				if(cmd.length === 1){
-					message.channel.send('Please tag someone with ```@username```');
-				}else{
-					message.channel.send(message.mentions.users.first().id);
-				}
+				sender.dmChannel.send('test done');
 				return;
 			default:
 				message.channel.send('Command not found');
