@@ -29,9 +29,16 @@ client.on('message', message => {
 					message.channel.send(opt[Math.floor(Math.random()*num)]);
 				}
 				return;
-			/* case 'quote':
+			case 'quote':
 				var file = require('./quote.json');
 				var count=0;
+				if(cmd[1]==='add'){
+					for(int i=2;i<cmd.length;i++){
+						q = q +' '+ cmd[i];
+					}
+					message.channel.send(q);
+					return;
+				}
 				while(count!==file.length){
 					if(file[count].name===cmd[1]){
 						message.channel.send(file[count].text);
@@ -39,7 +46,7 @@ client.on('message', message => {
 					}
 					count++;
 				}
-				return; */
+				return;
 			case 'abcdef':
 				if(sender.id!==bossId){
 					message.channel.send('you dont have enough permission.');
