@@ -4,6 +4,7 @@ const fs = require('fs')
 const prefix = '!';
 client.on('ready', () => {
 	client.user.setActivity('Yui-senpai with love');
+	client.user.set
 	console.log('I am ready!');
 });
 
@@ -39,7 +40,12 @@ client.on('message', message => {
 				}
 				return;
 			case 'suck':
-				
+			case 'show':
+				if(cmd.length === 1){
+					message.channel.send('Please tag someone with ```@username```');
+				}else{
+					message.channel.send(message.mentions.users.first[0].id);
+				}
 			default:
 				message.channel.send('Command not found');
 		}	
