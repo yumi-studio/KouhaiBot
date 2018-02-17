@@ -48,7 +48,7 @@ client.on('message', message => {
 				sender.send(message.mentions.users.first().username+':'+message.mentions.users.first().id);
 				return;
 			case 'watashi?':
-				em.setColor(Math.floor(Math.random()*16777216);
+				em.setColor(Math.floor(Math.random()*16777216));
 				em.setThumbnail(sender.avatarUrl);
 				em.addField('**Realname** ',sender.username);
 				em.addField('**Joined Time**',sender.createdAt);
