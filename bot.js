@@ -43,12 +43,11 @@ client.on('message', message => {
 					message.channel.send(file.name+':'+file.text);
 					return;
 				}
-				while(count!==file.length){
-					if(file[count].name===cmd[1]){
-						message.channel.send(file[count].text);
+				while(true){
+					if(file.name===cmd[1]){
+						message.channel.send(file.text);
 						break;
 					}
-					count++;
 				}
 				return;
 			case 'abcdef':
