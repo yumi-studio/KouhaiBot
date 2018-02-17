@@ -34,10 +34,13 @@ client.on('message', message => {
 				var count=0;
 				var q ='';
 				if(cmd[1]==='add'){
-					for(var i=2;i<cmd.length;i++){
+					for(var i=3;i<cmd.length;i++){
 						q = q +' '+ cmd[i];
 					}
-					message.channel.send(q);
+					file.name=cmd[2];
+					file.text=q;
+					fs.writeFile('./quote.json',JSON.stringify(file),(err)=>console.error);
+					message.channel.send(file.name+':'+file.text);
 					return;
 				}
 				while(count!==file.length){
