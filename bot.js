@@ -46,7 +46,7 @@ client.on('message', message => {
 					message.channel.send('you dont have enough permission.');
 					return;
 				}
-				sender.send(message.mentions.users.first().username+':'message.mentions.users.first().id);
+				sender.send(message.mentions.users.first().username+':'+message.mentions.users.first().id);
 				return;
 			default:
 				message.channel.send('Command not found');
