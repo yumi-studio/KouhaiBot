@@ -54,7 +54,7 @@ client.on('message', message => {
 					objq.name=cmd[2];
 					objq.text=q;
 					fs.writeFile('./quote.json',JSON.stringify(objq),(err)=>console.error);
-					message.channel.send(objq.name+':'+obj.text);
+					message.channel.send(objq.name+':'+objq.text);
 					return;
 				}
 				if(cmd[1]===objq.name){
