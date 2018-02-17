@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require('fs')
 const prefix = '!';
+const bossId = process.env.BOSS_ID;
 client.on('ready', () => {
 	client.user.setActivity('Yui-senpai with love');
 	client.user.set
@@ -9,9 +10,10 @@ client.on('ready', () => {
 });
 
 client.on('message', message => {
+	var sender= message.author;
+	var em = new Discord.RichEmbed();
 	if(message.content.substring(0,1) === prefix){
 		var cmd = message.content.substring(1,message.content.length).split(' ');
-		var em = new Discord.RichEmbed();
 		switch(cmd[0]){
 			case 'hhh':
 				em.setImage('https://i.imgur.com/ojjWsjK.jpg');
@@ -39,13 +41,20 @@ client.on('message', message => {
 					count++;
 				}
 				return;
-			case 'suck':
+			case 'test':
+				if(sender.id === bossId){
+					message.channel.send('Test done!');
+				}else{
+					message.channel.send('Test failed!')
+				}
+				return;
 			case 'show':
 				if(cmd.length === 1){
 					message.channel.send('Please tag someone with ```@username```');
 				}else{
 					message.channel.send(message.mentions.users.first().id);
 				}
+				return;
 			default:
 				message.channel.send('Command not found');
 		}	
