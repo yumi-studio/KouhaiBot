@@ -48,6 +48,11 @@ client.on('message', message => {
 				}
 				sender.send(message.mentions.users.first().username+':'+message.mentions.users.first().id);
 				return;
+			case 'watashi?':
+				em.setThumbnail(sender.avatarUrl);
+				em.setTitle(sender.username);
+				message.channel.send(em);
+				return;
 			default:
 				message.channel.send('Command not found');
 		}	
