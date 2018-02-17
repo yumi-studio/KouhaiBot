@@ -47,16 +47,16 @@ client.on('message', message => {
 				var objq = JSON.parse(fs.readFileSync("./quote.json","utf8"));
 				var count=0;
 				var q ='';
-				/* if(cmd[1]==='add'){
+				if(cmd[1]==='add'){
 					for(var i=3;i<cmd.length;i++){
 						q = q +' '+ cmd[i];
 					}
-					file.name=cmd[2];
-					file.text=q;
-					fs.writeFile('./quote.json',JSON.stringify(file),(err)=>console.error);
-					message.channel.send(file.name+':'+file.text);
+					objq.name=cmd[2];
+					objq.text=q;
+					fs.writeFile('./quote.json',JSON.stringify(objq),(err)=>console.error);
+					message.channel.send(objq.name+':'+obj.text);
 					return;
-				} */
+				}
 				if(cmd[1]===objq.name){
 					message.channel.send(objq.text);
 				}
