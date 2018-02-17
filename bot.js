@@ -32,6 +32,7 @@ client.on('message', message => {
 			case 'quote':
 				var file = require('./quote.json');
 				var count=0;
+				var q ='';
 				if(cmd[1]==='add'){
 					for(var i=2;i<cmd.length;i++){
 						q = q +' '+ cmd[i];
