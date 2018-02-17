@@ -33,7 +33,7 @@ client.on('message', message => {
 				var file = require('./quote.json');
 				var count=0;
 				if(cmd[1]==='add'){
-					for(int i=2;i<cmd.length;i++){
+					for(var i=2;i<cmd.length;i++){
 						q = q +' '+ cmd[i];
 					}
 					message.channel.send(q);
