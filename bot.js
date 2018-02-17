@@ -45,21 +45,31 @@ client.on('message', message => {
 				return;
 			case 'quote':
 				var objq = JSON.parse(fs.readFileSync("./quote.json","utf8"));
-				var count=0;
-				var q ='';
 				if(cmd[1]==='add'){
+					if(sender.id!==bossId){
+						message.channel.send("You dont have permission to use this command.");
+						return;
+					}
+					var q ='';
 					for(var i=3;i<cmd.length;i++){
 						q = q +' '+ cmd[i];
 					}
-					objq.name=cmd[2];
-					objq.text=q;
+					var newobj = {
+						name: cmd[2],
+						text: q
+					};
+					objq.push(newobj);
 					fs.writeFile('./quote.json',JSON.stringify(objq),(err)=>console.error);
-					message.channel.send(objq.name+':'+objq.text);
 					return;
 				}
-				if(cmd[1]===objq.name){
-					message.channel.send(objq.text);
+				for(var j=0;j<objq.length;j++){
+					if(cmd[1]===objq[j].name){
+						em.setTitle(cmd[1]);
+						em.setDescription(objq[j].text);
+						message.channel.send(em);
+					}
 				}
+				
 				return;
 			case 'abcdef':
 				if(sender.id!==bossId){
