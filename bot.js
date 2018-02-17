@@ -29,7 +29,7 @@ client.on('message', message => {
 					message.channel.send(opt[Math.floor(Math.random()*num)]);
 				}
 				return;
-			case 'quote':
+			/* case 'quote':
 				var file = require('./quote.json');
 				var count=0;
 				var q ='';
@@ -49,7 +49,7 @@ client.on('message', message => {
 						break;
 					}
 				}
-				return;
+				return; */
 			case 'abcdef':
 				if(sender.id!==bossId){
 					message.channel.send('you dont have enough permission.');
@@ -59,9 +59,9 @@ client.on('message', message => {
 				return;
 			case 'watashi?':
 				em.setColor(Math.floor(Math.random()*16777216));
-				em.setThumbnail(sender.avatarUrl);
 				em.addField('**Realname** ',sender.username);
 				em.addField('**Joined Time**',sender.createdAt);
+				em.setThumbnail(sender.avatarUrl);
 				message.channel.send(em);
 				return;
 			default:
