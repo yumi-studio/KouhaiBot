@@ -46,7 +46,7 @@ client.on('message', message => {
 					message.channel.send('you dont have enough permission.');
 					return;
 				}
-				sender.dmChannel.send('test done');
+				sender.dmChannel.sendMessage('test done');
 				return;
 			default:
 				message.channel.send('Command not found');
