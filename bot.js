@@ -9,8 +9,6 @@ client.on('message', message => {
 	if(message.content.substring(0,1) === prefix){
 		var cmd = message.content.substring(1,message.content.length).split(' ');
 		var em = new Discord.RichEmbed();
-		var canvas= document.getElementById('canvas');
-		var ctx = canvas.getContext('2d')
 		switch(cmd[0]){
 			case 'hhh':
 				em.setImage('https://i.imgur.com/ojjWsjK.jpg');
