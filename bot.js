@@ -64,6 +64,10 @@ client.on('message', message => {
 				em.setThumbnail(sender.avatarUrl);
 				message.channel.send(em);
 				return;
+			case 'avatar':
+				em.setThumbnail(sender.avatarUrl);
+				message.channel.send(em);
+				return;
 			default:
 				message.channel.send('Command not found');
 		}	
