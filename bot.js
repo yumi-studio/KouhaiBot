@@ -61,11 +61,8 @@ client.on('message', message => {
 				em.setColor(Math.floor(Math.random()*16777216));
 				em.addField('**Realname** ',sender.username);
 				em.addField('**Joined Time**',sender.createdAt);
-				em.setThumbnail(sender.avatarUrl);
+				em.setThumbnail(sender.avatarURL);
 				message.channel.send(em);
-				return;
-			case 'avatar':
-				message.channel.send(sender.avatarUrl);
 				return;
 			default:
 				message.channel.send('Command not found');
