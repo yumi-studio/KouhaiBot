@@ -44,12 +44,24 @@ client.on('message', message => {
 				}
 				return;
 			case 'quote':
+				var objq=[];
 				if(cmd[1]==='add'){
 					if(sender.id!==bossId){
 						message.channel.send("You dont have permission to use this command.");
 						return;
 					}
-					var objq = JSON.parse(fs.readFileSync("./quote"+message.guild.id+".json","utf8"));
+					
+					try{
+						objq = JSON.parse(fs.readFileSync("./quote"+message.guild.id+".json","utf8"));
+					}catch(err){
+						fs.writeFile("./quote"+message.guild.id+".json",JSON.stringify(objq),"utf8",function(err){
+							if(err){
+								console.log(err);
+							}
+						}
+						console.log("created file");
+					}
+					
 					var q ='';
 					for(var i=3;i<cmd.length;i++){
 						q = q +' '+ cmd[i];
@@ -88,7 +100,7 @@ client.on('message', message => {
 				message.channel.send(em);
 				return; 
 			case 'inviteme':
-				message.channel.send(message.client.generateInvite());
+				message.channel.send('https://discordapp.com/api/oauth2/authorize?client_id=413384938965172255&permissions=0&scope=bot');
 				return;
 			default:
 				message.channel.send('Command not found');
