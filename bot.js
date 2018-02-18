@@ -17,7 +17,7 @@ client.on('guildMemberAdd', member =>{
 client.on('message', message => {
 	var sender= message.author;
 	var em = new Discord.RichEmbed();
-	if(message.content.substring(0,1) === prefix){
+	if(message.content.substring(0,1) === prefix && message.channel.type!=='dm'){
 		var cmd = message.content.substring(1,message.content.length).split(' ');
 		switch(cmd[0]){
 			
@@ -44,12 +44,12 @@ client.on('message', message => {
 				}
 				return;
 			case 'quote':
-				var objq = JSON.parse(fs.readFileSync("./quote.json","utf8"));
 				if(cmd[1]==='add'){
 					if(sender.id!==bossId){
 						message.channel.send("You dont have permission to use this command.");
 						return;
 					}
+					var objq = JSON.parse(fs.readFileSync("./quote"+message.guild.id+".json","utf8"));
 					var q ='';
 					for(var i=3;i<cmd.length;i++){
 						q = q +' '+ cmd[i];
@@ -67,9 +67,9 @@ client.on('message', message => {
 						em.setTitle(cmd[1]);
 						em.setDescription(objq[j].text);
 						message.channel.send(em);
+						return;
 					}
 				}
-				
 				return;
 			case 'abcdef':
 				if(sender.id!==bossId){
@@ -87,6 +87,9 @@ client.on('message', message => {
 				em.setThumbnail(sender.avatarURL);
 				message.channel.send(em);
 				return; 
+			case 'inviteme':
+				message.channel.send(message.client.generateInvite());
+				return;
 			default:
 				message.channel.send('Command not found');
 		}	
