@@ -58,7 +58,7 @@ client.on('message', message => {
 							if(err){
 								console.log(err);
 							}
-						}
+						});
 						console.log("created file");
 					}
 					
