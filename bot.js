@@ -46,6 +46,7 @@ client.on('message', message => {
 			case 'quote':
 				var objq=[];
 				var guildId = message.guild.id;
+				objq = JSON.parse(fs.readFileSync("./quote.json","utf8"));
 				var check = objq.indexOf({id : guildId});
 				if(cmd[1]==='add'){
 					
@@ -55,7 +56,7 @@ client.on('message', message => {
 						return;
 					}
 					
-					objq = JSON.parse(fs.readFileSync("./quote.json","utf8"));
+					
 					
 					/*Create new quote*/
 					var q ='';
@@ -80,6 +81,7 @@ client.on('message', message => {
 						});
 					}else{
 						objq[check].quotes.push(newobj);
+						
 					}
 					
 					/*write object to file*/
