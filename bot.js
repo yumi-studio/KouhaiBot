@@ -77,11 +77,6 @@ client.on('message', message => {
 					return;
 				}
 				
-				if(check===-1){
-					message.channel.send("This server doesn't have any quote");
-					return;
-				}
-				
 				for(var j=0;j<objq.length;j++){
 					if(cmd[1]===objq[j].name){
 						em.setTitle("**"+cmd[1]+"**");
