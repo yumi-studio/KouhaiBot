@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require('fs')
 const prefix = '!';
-const bossId = process.env.BOSS_ID;
+const bossId = "201912139240308736";
 client.on('ready', () => {
 	client.user.setActivity('Yui-senpai with love');
 	console.log('I am ready!');
@@ -71,6 +71,7 @@ client.on('message', message => {
 						text: q
 					};
 					
+					objq.push(newobj);
 					/*write object to file*/
 					fs.writeFile("./quotes/quote"+guildId+".json",JSON.stringify(objq),(err)=>console.error);
 					message.channel.send("New quote **"+newobj.name+"** is added.");
@@ -110,4 +111,4 @@ client.on('message', message => {
 		}	
 	}
 });
-client.login(process.env.BOT_TOKEN);
+client.login("NDEzMzg0OTM4OTY1MTcyMjU1.DWgAyA.gILQ7AE0BZxlnQyoAdicKjzDkw0");
