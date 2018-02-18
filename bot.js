@@ -67,16 +67,20 @@ client.on('message', message => {
 						text: q
 					};
 					
-					/*Check guild id if exist*/
+					/*Check guild id if exist and push new quote*/
 					if(check===-1){
 						objq.push({
 							id: guildId,
-							quotes: []
+							quotes: [
+								{
+									name: cmd[2],
+									text: q
+								}
+							]
 						});
+					}else{
+						objq[check].quotes.push(newobj);
 					}
-					
-					/*push new content*/
-					objq[check].quotes.push(newobj);
 					
 					/*write object to file*/
 					fs.writeFile("./quote.json",JSON.stringify(objq),(err)=>console.error);
