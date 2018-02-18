@@ -54,7 +54,7 @@ client.on('message', message => {
 					try{
 						objq = JSON.parse(fs.readFileSync("./quote"+message.guild.id+".json","utf8"));
 					}catch(err){
-						fs.writeFile("./quote"+message.guild.id+".json",JSON.stringify(objq),"utf8",function(err){
+						fs.writeFile("./quote"+message.guild.id+".json",JSON.stringify(objq),function(err){
 							if(err){
 								console.log(err);
 							}
@@ -71,7 +71,7 @@ client.on('message', message => {
 						text: q
 					};
 					objq.push(newobj);
-					fs.writeFile('./quote.json',JSON.stringify(objq),(err)=>console.error);
+					fs.writeFile("./quote"+message.guild.id+".json",JSON.stringify(objq),(err)=>console.error);
 					return;
 				}
 				for(var j=0;j<objq.length;j++){
