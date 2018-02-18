@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require('fs')
 const prefix = '!';
-const bossId = "201912139240308736";
+const bossId = process.env.BOSS_ID;
 client.on('ready', () => {
 	client.user.setActivity('Yui-senpai with love');
 	console.log('I am ready!');
@@ -111,4 +111,4 @@ client.on('message', message => {
 		}	
 	}
 });
-client.login("NDEzMzg0OTM4OTY1MTcyMjU1.DWgAyA.gILQ7AE0BZxlnQyoAdicKjzDkw0");
+client.login(process.env.BOT_TOKEN);
