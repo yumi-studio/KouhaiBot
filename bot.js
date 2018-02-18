@@ -58,7 +58,7 @@ client.on('message', message => {
 					try{
 						objq = JSON.parse(fs.readFileSync("./quotes/quote"+guildId+".json","utf8"));
 					}catch(err){
-						fs.writeFile("./quotes/quote"+guildId+".json",JSON.stringify(objq));
+						fs.writeFile("./quotes/quote"+guildId+".json",JSON.stringify(objq),(err)=>console.error);
 					}
 					
 					/*Create new quote*/
@@ -72,8 +72,8 @@ client.on('message', message => {
 					};
 					
 					/*write object to file*/
-					fs.writeFile("./quotes/quote"+guildId+".json",JSON.stringify(objq));
-					message.channel.send("New quote **"+newobj.text+"** is added.");
+					fs.writeFile("./quotes/quote"+guildId+".json",JSON.stringify(objq),(err)=>console.error);
+					message.channel.send("New quote **"+newobj.name+"** is added.");
 					return;
 				}
 				
