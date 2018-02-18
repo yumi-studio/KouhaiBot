@@ -68,16 +68,15 @@ client.on('message', message => {
 					};
 					
 					/*Check guild id if exist*/
-					
 					if(check===-1){
 						objq.push({
 							id: guildId,
-							content: []
+							quotes: []
 						});
 					}
 					
 					/*push new content*/
-					objq[check].content.push(newobj);
+					objq[check].quotes.push(newobj);
 					
 					/*write object to file*/
 					fs.writeFile("./quote.json",JSON.stringify(objq),(err)=>console.error);
@@ -90,10 +89,10 @@ client.on('message', message => {
 					return;
 				}
 				
-				for(var j=0;j<objq[check].content.length;j++){
-					if(cmd[1]===objq[check].content[j].name){
+				for(var j=0;j<objq[check].quotes.length;j++){
+					if(cmd[1]===objq[check].quotes[j].name){
 						em.setTitle("**"+cmd[1]+"**");
-						em.setDescription("_"+objq[j].text+"_");
+						em.setDescription("_"+objq[check].quotes[j].text+"_");
 						message.channel.send(em);
 						return;
 					}
