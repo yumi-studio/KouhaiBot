@@ -45,23 +45,19 @@ client.on('message', message => {
 				return;
 			case 'quote':
 				var objq=[];
+				var guildId = message.guild.id;
+				var check = objq.indexOf({id : guildId});
 				if(cmd[1]==='add'){
+					
+					/*Check permission*/
 					if(sender.id!==bossId){
 						message.channel.send("You dont have permission to use this command.");
 						return;
 					}
 					
-					try{
-						objq = JSON.parse(fs.readFileSync("./quote"+message.guild.id+".json","utf8"));
-					}catch(err){
-						fs.writeFile("./quote"+message.guild.id+".json",JSON.stringify(objq),function(err){
-							if(err){
-								console.log(err);
-							}
-						});
-						console.log("created file");
-					}
+					objq = JSON.parse(fs.readFileSync("./quote.json","utf8"));
 					
+					/*Create new quote*/
 					var q ='';
 					for(var i=3;i<cmd.length;i++){
 						q = q +' '+ cmd[i];
@@ -70,14 +66,34 @@ client.on('message', message => {
 						name: cmd[2],
 						text: q
 					};
-					objq.push(newobj);
-					fs.writeFile("./quote"+message.guild.id+".json",JSON.stringify(objq),(err)=>console.error);
+					
+					/*Check guild id if exist*/
+					
+					if(check===-1){
+						objq.push({
+							id: guildId,
+							content: []
+						});
+					}
+					
+					/*push new content*/
+					objq[check].content.push(newobj);
+					
+					/*write object to file*/
+					fs.writeFile("./quote.json",JSON.stringify(objq),(err)=>console.error);
+					message.channel.send("New quote **"+newobj.text+"** is added.");
 					return;
 				}
-				for(var j=0;j<objq.length;j++){
-					if(cmd[1]===objq[j].name){
-						em.setTitle(cmd[1]);
-						em.setDescription(objq[j].text);
+				
+				if(check===-1){
+					message.channel.send("This server doesn't have any quote");
+					return;
+				}
+				
+				for(var j=0;j<objq[check].content.length;j++){
+					if(cmd[1]===objq[check].content[j].name){
+						em.setTitle("**"+cmd[1]+"**");
+						em.setDescription("_"+objq[j].text+"_");
 						message.channel.send(em);
 						return;
 					}
