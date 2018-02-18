@@ -46,19 +46,19 @@ client.on('message', message => {
 			case 'quote':
 				var objq=[];
 				var guildId = message.guild.id;
+				/*Check if file not exist, create new file*/
+				try{
+					objq = JSON.parse(fs.readFileSync("./quotes/quote"+guildId+".json","utf8"));
+				}catch(err){
+					fs.writeFile("./quotes/quote"+guildId+".json",JSON.stringify(objq),(err)=>console.error);
+				}
+				
 				if(cmd[1]==='add'){
 					
 					/*Check permission*/
 					if(sender.id!==bossId){
 						message.channel.send("You dont have permission to use this command.");
 						return;
-					}
-					
-					/*Check if file not exist, create new file*/
-					try{
-						objq = JSON.parse(fs.readFileSync("./quotes/quote"+guildId+".json","utf8"));
-					}catch(err){
-						fs.writeFile("./quotes/quote"+guildId+".json",JSON.stringify(objq),(err)=>console.error);
 					}
 					
 					/*Create new quote*/
