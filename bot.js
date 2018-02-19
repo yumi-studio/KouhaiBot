@@ -5,6 +5,8 @@ const client = new Discord.Client();
 const fs = require('fs');
 const prefix = '!';
 const bossId = process.env.BOSS_ID;
+const music = require('opusscript');
+const ytdl = require('ytdl-core');
 
 client.on('ready', () => {
 	client.user.setActivity('Yui-senpai with love');
@@ -119,12 +121,20 @@ client.on('message', message => {
 				return;
 				
 			/*Play music*/
-			case 'join':
-				message.member.voiceChannel.join();
+			case 'play':
+				var link = cmd[1];
+				var streamOptions = { seek: 0, volume: 1 };
+				message.member.voiceChannel.join()
+				  .then(connection => {
+					const stream = ytdl(link, { filter : 'audioonly' });
+					const dispatcher = connection.playStream(stream, streamOptions);
+				  })
+				  .catch(console.error);
 				return;
 			default:
 				message.channel.send('Command not found');
 		}	
 	}
 });
+
 client.login(process.env.BOT_TOKEN);
