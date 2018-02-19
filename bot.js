@@ -121,7 +121,7 @@ client.on('message', message => {
 				return;
 				
 			/*Play music*/
-			case 'play':
+			/* case 'play':
 				var link = cmd[1];
 				var streamOptions = { seek: 0, volume: 1 };
 				message.member.voiceChannel.join()
@@ -130,7 +130,7 @@ client.on('message', message => {
 					const dispatcher = connection.playStream(stream, streamOptions);
 				  })
 				  .catch(console.error);
-				return;
+				return; */
 			default:
 				message.channel.send('Command not found');
 		}	
