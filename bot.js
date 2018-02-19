@@ -1,8 +1,11 @@
+/* global process */
+
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const fs = require('fs')
+const fs = require('fs');
 const prefix = '!';
 const bossId = process.env.BOSS_ID;
+
 client.on('ready', () => {
 	client.user.setActivity('Yui-senpai with love');
 	console.log('I am ready!');
@@ -36,6 +39,7 @@ client.on('message', message => {
 				return;
 			
 			/*--------------------------------*/
+			/*Random a selection*/
 			case 'roll':
 				var opt = cmd[1].split('-');
 				var num= opt.length;
@@ -43,6 +47,7 @@ client.on('message', message => {
 					message.channel.send(opt[Math.floor(Math.random()*num)]);
 				}
 				return;
+			/*Quote*/
 			case 'quote':
 				var objq=[];
 				var guildId = message.guild.id;
@@ -87,6 +92,8 @@ client.on('message', message => {
 					}
 				}
 				return;
+				
+			/*Return id of an user*/
 			case 'abcdef':
 				if(sender.id!==bossId){
 					message.channel.send('you dont have enough permission.');
@@ -94,6 +101,8 @@ client.on('message', message => {
 				}
 				sender.send(message.mentions.users.first().username+':'+message.mentions.users.first().id);
 				return;
+			
+			/*Return some information of mentioned member*/
 			case 'watashi?':
 				em.setColor(Math.floor(Math.random()*16777216));
 				em.setTitle('**'+message.member.displayName+'**');
@@ -103,8 +112,15 @@ client.on('message', message => {
 				em.setThumbnail(sender.avatarURL);
 				message.channel.send(em);
 				return; 
+			
+			/*Invite the bot*/
 			case 'inviteme':
 				message.channel.send('https://discordapp.com/api/oauth2/authorize?client_id=413384938965172255&permissions=0&scope=bot');
+				return;
+				
+			/*Play music*/
+			case 'join':
+				message.member.voiceChannel.join();
 				return;
 			default:
 				message.channel.send('Command not found');
