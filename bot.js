@@ -5,8 +5,6 @@ const client = new Discord.Client();
 const fs = require('fs');
 const prefix = '!';
 const bossId = process.env.BOSS_ID;
-const music = require('opusscript');
-const ytdl = require('ytdl-core');
 
 client.on('ready', () => {
 	client.user.setActivity('Yui-senpai with love');
