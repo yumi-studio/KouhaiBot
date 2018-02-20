@@ -4,18 +4,19 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require('fs');
 
-const Redis = require('ioredis');
-const JSONStore = require('./');
-
-const redis = new Redis();
-const jsonStore = new JSONStore(redis);
+var redis = require('redis');
+var rdc = redis.createClient(); //creates a new client
 
 const prefix = '!';
 const bossId = process.env.BOSS_ID;
 
 client.on('ready', () => {
 	client.user.setActivity('Yui-senpai with love');
-	console.log('I am ready!');
+	console.log('bot is ready');
+});
+
+rdc.on('connect', function() {
+    console.log('redis database connected');
 });
 
 client.on('message', message => {
@@ -52,9 +53,7 @@ client.on('message', message => {
 			case 'quote':
 				var objq=[];
 				var guildId = message.guild.id;
-				objq = jsonStore.get('quote'+guildId,function(err,result){
-						console.log(err,result);
-					});
+				objq = rdc.hgetall(bossId+'quote'+guildId);
 					
 				if(cmd[1]==='add'){
 					
@@ -74,9 +73,8 @@ client.on('message', message => {
 						text: q
 					};
 					objq.push(newobj);
-					jsonStore.set('quote'+guildId,objq,function(err, result){
-						console.log(err, result);
-					});
+					rdc.del(bossId+'quote'+guildId);
+					rdc.hmset(bossId+'quote'+guildId,objq);
 					message.channel.send("New quote **"+newobj.name+"** is added.");
 					return;
 				}
