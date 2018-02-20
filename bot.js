@@ -4,9 +4,6 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require('fs');
 
-var redis = require('redis');
-var rdc = redis.createClient(); //creates a new client
-
 const prefix = '!';
 const bossId = process.env.BOSS_ID;
 
@@ -49,46 +46,45 @@ client.on('message', message => {
 					message.channel.send(opt[Math.floor(Math.random()*num)]);
 				}
 				return;
-			/*Quote*/
-			case 'quote':
-				var objq=[];
-				var guildId = message.guild.id;
-				objq = rdc.hgetall(bossId+'quote'+guildId);
+			// /*Quote*/
+			// /* case 'quote':
+				// var objq=[];
+				// var guildId = message.guild.id;
+				// objq = rdc.hgetall(bossId+'quote'+guildId);
 					
-				if(cmd[1]==='add'){
+				// if(cmd[1]==='add'){
 					
-					/*Check permission*/
-					if(sender.id!==bossId){
-						message.channel.send("You dont have permission to use this command.");
-						return;
-					}
+					// /*Check permission*/
+				// /* 	if(sender.id!==bossId){
+						// message.channel.send("You dont have permission to use this command.");
+						// return;
+					// }
 					
-					/*Create new quote*/
-					var q ='';
-					for(var i=3;i<cmd.length;i++){
-						q = q +' '+ cmd[i];
-					}
-					var newobj = {
-						name: cmd[2],
-						text: q
-					};
-					objq.push(newobj);
-					rdc.del(bossId+'quote'+guildId);
-					rdc.hmset(bossId+'quote'+guildId,objq);
-					message.channel.send("New quote **"+newobj.name+"** is added.");
-					return;
-				}
+					// /*Create new quote*/
+					// var q ='';
+					// for(var i=3;i<cmd.length;i++){
+						// q = q +' '+ cmd[i];
+					// }
+					// var newobj = {
+						// name: cmd[2],
+						// text: q
+					// };
+					// objq.push(newobj);
+					// rdc.del(bossId+'quote'+guildId);
+					// rdc.hmset(bossId+'quote'+guildId,objq);
+					// message.channel.send("New quote **"+newobj.name+"** is added.");
+					// return;
+				// }
 				
-				for(var j=0;j<objq.length;j++){
-					if(cmd[1]===objq[j].name){
-						em.setTitle("**"+cmd[1]+"**");
-						em.setDescription("_"+objq[j].text+"_");
-						message.channel.send(em);
-						return;
-					}
-				}
-				return;
-				
+				// for(var j=0;j<objq.length;j++){
+					// if(cmd[1]===objq[j].name){
+						// em.setTitle("**"+cmd[1]+"**");
+						// em.setDescription("_"+objq[j].text+"_");
+						// message.channel.send(em);
+						// return;
+					// }
+				// }
+				//return;
 			/*Return id of an user*/
 			case 'abcdef':
 				if(sender.id!==bossId){
