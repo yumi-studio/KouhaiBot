@@ -3,18 +3,19 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require('fs');
+
+const redis = require('ioredis');
+const JSONStore = require('./');
+
+const redis = new Redis();
+const jsonStore = new JSONStore(redis);
+
 const prefix = '!';
 const bossId = process.env.BOSS_ID;
 
 client.on('ready', () => {
 	client.user.setActivity('Yui-senpai with love');
 	console.log('I am ready!');
-});
-
-client.on('guildMemberAdd', member =>{
-	const channel = member.guild.find('name','member-log');
-	if(!channel) return;
-	channel.send('Welcome to '+member.guild.name+',${member} senpai');
 });
 
 client.on('message', message => {
@@ -33,7 +34,7 @@ client.on('message', message => {
 				em.setImage('https://i.imgur.com/nacjQtW.jpg');
 				message.channel.send(em);
 				return;
-			case 'yaoming':
+			case 'ym':
 				em.setImage('https://i.imgur.com/5218yLa.jpg');
 				message.channel.send(em);
 				return;
@@ -51,13 +52,10 @@ client.on('message', message => {
 			case 'quote':
 				var objq=[];
 				var guildId = message.guild.id;
-				/*Check if file not exist, create new file*/
-				try{
-					objq = JSON.parse(fs.readFileSync("./quotes/quote"+guildId+".json","utf8"));
-				}catch(err){
-					fs.writeFile("./quotes/quote"+guildId+".json",JSON.stringify(objq),(err)=>console.error);
-				}
-				
+				objq = jsonStore.get('quote'+guildId,function(err,result){
+						console.log(err,result);
+					});
+					
 				if(cmd[1]==='add'){
 					
 					/*Check permission*/
@@ -75,10 +73,10 @@ client.on('message', message => {
 						name: cmd[2],
 						text: q
 					};
-					
 					objq.push(newobj);
-					/*write object to file*/
-					fs.writeFile("./quotes/quote"+guildId+".json",JSON.stringify(objq),(err)=>console.error);
+					jsonStore.set('quote'+guildId,objq,function(err, result){
+						console.log(err, result);
+					});
 					message.channel.send("New quote **"+newobj.name+"** is added.");
 					return;
 				}

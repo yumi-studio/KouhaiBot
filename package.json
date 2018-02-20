@@ -8,6 +8,10 @@
   },
   "dependencies": {
     "discord.js": "11.3.0",
+    "redis": "^2.8.0",
     "request": "2.81.0"
+  },
+  "devDependencies": {
+    "redis-json": "^1.0.2"
   }
 }
