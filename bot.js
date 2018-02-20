@@ -11,10 +11,10 @@ client.on('ready', () => {
 	client.user.setActivity('Yui-senpai with love');
 	console.log('bot is ready');
 });
-
+/* 
 rdc.on('connect', function() {
     console.log('redis database connected');
-});
+}); */
 
 client.on('message', message => {
 	var sender= message.author;
