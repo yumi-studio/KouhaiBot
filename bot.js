@@ -60,8 +60,9 @@ client.on('message', message => {
 					for(var i=3;i<cmd.length;i++){
 						q = q +' '+ cmd[i];
 					}
-					rdc.hmset('quote'+guildId+cmd[2],q);
-					message.channel.send("New quote **"+cmd[2]+"** is added.");
+					rdc.hmset('quote'+guildId+cmd[2],q,function(err,res){
+						message.channel.send("New quote **"+cmd[2]+"** is added.");
+					});
 					return;
 				}
 				
