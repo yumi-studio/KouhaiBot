@@ -66,7 +66,9 @@ client.on('message', message => {
 					return;
 				}
 				
-				let quote= rdc.get('quote'+guildId+cmd[2]);
+				rdc.get('quote'+guildId+cmd[2],function(err,reply){
+					message.channel.send(reply);
+				});
 				message.channel.send(quote);
 				return;
 			/*Return id of an user*/
