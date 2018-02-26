@@ -66,8 +66,8 @@ client.on('message', message => {
 					return;
 				}
 				
-				rdc.getAsync('quote'+guildId+cmd[2]).then(function(res){
-					message.channel.send(res);
+				rdc.get('quote'+guildId+cmd[2],function(err,reply){
+					message.channel.send(reply.toString());
 				});
 				return;
 			/*Return id of an user*/
