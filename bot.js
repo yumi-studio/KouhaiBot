@@ -46,10 +46,7 @@ client.on('message', message => {
 				return;
 			/*Quote*/
 			case 'quote':
-				var objq=[];
 				var guildId = message.guild.id;
-				objq = rdc.hgetall(bossId+'quote'+guildId);
-					
 				if(cmd[1]==='add'){
 					
 					/* Check permission */
@@ -63,25 +60,13 @@ client.on('message', message => {
 					for(var i=3;i<cmd.length;i++){
 						q = q +' '+ cmd[i];
 					}
-					var newobj = {
-						name: cmd[2],
-						text: q
-					};
-					objq.push(newobj);
-					rdc.del(bossId+'quote'+guildId);
-					rdc.hmset(bossId+'quote'+guildId,objq);
-					message.channel.send("New quote **"+newobj.name+"** is added.");
+					rdc.hmset('quote'+guildId+cmd[2],q);
+					message.channel.send("New quote **"+cmd[2]+"** is added.");
 					return;
 				}
 				
-				for(var j=0;j<objq.length;j++){
-					if(cmd[1]===objq[j].name){
-						em.setTitle("**"+cmd[1]+"**");
-						em.setDescription("_"+objq[j].text+"_");
-						message.channel.send(em);
-						return;
-					}
-				}
+				let quote= rdc.get('quote'+guildId+cmd[2]);
+				message.channel.send(quote);
 				return;
 			/*Return id of an user*/
 			case 'abcdef':
