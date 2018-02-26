@@ -4,6 +4,8 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require('fs');
 
+var rdc = require('redis').createClient(process.env.REDIS_URL);
+
 const prefix = '!';
 const bossId = process.env.BOSS_ID;
 
@@ -11,10 +13,6 @@ client.on('ready', () => {
 	client.user.setActivity('Yui-senpai with love');
 	console.log('bot is ready');
 });
-/* 
-rdc.on('connect', function() {
-    console.log('redis database connected');
-}); */
 
 client.on('message', message => {
 	var sender= message.author;
@@ -46,45 +44,45 @@ client.on('message', message => {
 					message.channel.send(opt[Math.floor(Math.random()*num)]);
 				}
 				return;
-			// /*Quote*/
-			// /* case 'quote':
-				// var objq=[];
-				// var guildId = message.guild.id;
-				// objq = rdc.hgetall(bossId+'quote'+guildId);
+			/*Quote*/
+			case 'quote':
+				var objq=[];
+				var guildId = message.guild.id;
+				objq = rdc.hgetall(bossId+'quote'+guildId);
 					
-				// if(cmd[1]==='add'){
+				if(cmd[1]==='add'){
 					
-					// /*Check permission*/
-				// /* 	if(sender.id!==bossId){
-						// message.channel.send("You dont have permission to use this command.");
-						// return;
-					// }
+					Check permission
+					if(sender.id!==bossId){
+						message.channel.send("You dont have permission to use this command.");
+						return;
+					}
 					
-					// /*Create new quote*/
-					// var q ='';
-					// for(var i=3;i<cmd.length;i++){
-						// q = q +' '+ cmd[i];
-					// }
-					// var newobj = {
-						// name: cmd[2],
-						// text: q
-					// };
-					// objq.push(newobj);
-					// rdc.del(bossId+'quote'+guildId);
-					// rdc.hmset(bossId+'quote'+guildId,objq);
-					// message.channel.send("New quote **"+newobj.name+"** is added.");
-					// return;
-				// }
+					/*Create new quote*/
+					var q ='';
+					for(var i=3;i<cmd.length;i++){
+						q = q +' '+ cmd[i];
+					}
+					var newobj = {
+						name: cmd[2],
+						text: q
+					};
+					objq.push(newobj);
+					rdc.del(bossId+'quote'+guildId);
+					rdc.hmset(bossId+'quote'+guildId,objq);
+					message.channel.send("New quote **"+newobj.name+"** is added.");
+					return;
+				}
 				
-				// for(var j=0;j<objq.length;j++){
-					// if(cmd[1]===objq[j].name){
-						// em.setTitle("**"+cmd[1]+"**");
-						// em.setDescription("_"+objq[j].text+"_");
-						// message.channel.send(em);
-						// return;
-					// }
-				// }
-				//return;
+				for(var j=0;j<objq.length;j++){
+					if(cmd[1]===objq[j].name){
+						em.setTitle("**"+cmd[1]+"**");
+						em.setDescription("_"+objq[j].text+"_");
+						message.channel.send(em);
+						return;
+					}
+				}
+				return;
 			/*Return id of an user*/
 			case 'abcdef':
 				if(sender.id!==bossId){
@@ -94,7 +92,7 @@ client.on('message', message => {
 				sender.send(message.mentions.users.first().username+':'+message.mentions.users.first().id);
 				return;
 			
-			/*Return some information of mentioned member*/
+			/*Return some information of member*/
 			case 'watashi?':
 				em.setColor(Math.floor(Math.random()*16777216));
 				em.setTitle('**'+message.member.displayName+'**');
@@ -121,6 +119,26 @@ client.on('message', message => {
 				  })
 				  .catch(console.error);
 				return; */
+				
+			/*Werewolve*/
+			case 'masoi':{
+				if(sender.id!==bossId){
+					message.channel.send('you dont have enough permission.');
+					return;
+				}
+				var cha= [];
+				var role = 
+				message.channel.send("Bắt đầu game ma sói, gõ **masoi join** để tham gia");
+				while(true){
+					client.on('message', gamemes =>{
+						if(gamemes.content === cmd[0]+' join'){
+							cha.push({
+								name: gamemes.author.id
+							});
+						}
+					});
+				}
+			}
 			default:
 				message.channel.send('Command not found');
 		}	
