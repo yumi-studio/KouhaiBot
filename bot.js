@@ -52,7 +52,7 @@ client.on('message', message => {
 					
 				if(cmd[1]==='add'){
 					
-					Check permission
+					/* Check permission */
 					if(sender.id!==bossId){
 						message.channel.send("You dont have permission to use this command.");
 						return;
