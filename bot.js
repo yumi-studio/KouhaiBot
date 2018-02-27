@@ -86,8 +86,9 @@ client.on('message', message => {
 							return element.name===cmd[1];
 						});
 						if(found!==undefined){
-							em.setTitle("**"+cmd[1]+"**");
-							em.setDescription("_"+found.text+"_");
+							em.setTitle("**"+found.name+"**");
+							em.setDescription('_"'+found.text+'"_');
+							em.setColor(Math.floor(Math.random()*16777216));
 							message.channel.send(em);
 						}
 					}else{
