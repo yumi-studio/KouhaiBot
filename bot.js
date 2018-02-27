@@ -50,7 +50,7 @@ client.on('message', message => {
 				var objq = [];
 				rdc.get("quote"+guildId,function(err,obj){
 					objq = JSON.parse(obj);
-				}
+				});
 				if(cmd[1]==='add'){
 					
 					/* Check permission */
