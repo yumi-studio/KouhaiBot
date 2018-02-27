@@ -50,29 +50,30 @@ client.on('message', message => {
 				var objq =[];
 				if(cmd[1]==='add'){
 					/* Check permission */
-					if(sender.id!==bossId || message.member.permissions.FLAGS!=='ADMINISTRATOR'){
+					if(sender.id===bossId || message.member.permissions.FLAGS==='ADMINISTRATOR'){
+						rdc.get("quote"+guildId,function(err,reply){
+							objq = JSON.parse(reply.toString());
+						});
+						
+						/*Create new quote*/
+						var q ='';
+						for(var i=3;i<cmd.length;i++){
+							q = q +' '+ cmd[i];
+						}
+						var newobj = {
+							name: cmd[2],
+							text: q
+						};
+						
+						objq.push(newobj);
+						objq = JSON.stringify(objq);
+						rdc.set('quote'+guildId,objq,function(){
+							message.channel.send("New quote **"+newobj.name+"** is added.");
+						});
+					}else{
 						message.channel.send("You dont have permission to use this command.");
-						return;
 					}
-					rdc.get("quote"+guildId,function(err,reply){
-						objq = JSON.parse(reply.toString());
-					});
 					
-					/*Create new quote*/
-					var q ='';
-					for(var i=3;i<cmd.length;i++){
-						q = q +' '+ cmd[i];
-					}
-					var newobj = {
-						name: cmd[2],
-						text: q
-					};
-					
-					objq.push(newobj);
-					objq = JSON.stringify(objq);
-					rdc.set('quote'+guildId,objq,function(){
-						message.channel.send("New quote **"+newobj.name+"** is added.");
-					});
 					return;
 				}
 				
