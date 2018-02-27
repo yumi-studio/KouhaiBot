@@ -49,14 +49,14 @@ client.on('message', message => {
 				var guildId = message.guild.id;
 				var objq =[];
 				if(cmd[1]==='add'){
-					/* rdc.get("quote"+guildId,function(err,obj){
-						objq = JSON.parse(obj);
-					}); */
 					/* Check permission */
-					if(sender.id!==bossId){
+					if(sender.id!==bossId || message.member.permissions.FLAGS!=='ADMINISTRATOR'){
 						message.channel.send("You dont have permission to use this command.");
 						return;
 					}
+					rdc.get("quote"+guildId,function(err,reply){
+						objq = JSON.parse(reply.toString());
+					});
 					
 					/*Create new quote*/
 					var q ='';
@@ -75,18 +75,18 @@ client.on('message', message => {
 					});
 					return;
 				}
-				objq = rdc.get('quote'+guildId,function(err,reply){
-					message.channel.send(reply.toString());
-				});
-				/* 
-				for(var j=0;j<objq.length;j++){
-					if(cmd[1]===objq[j].name){
+				rdc.get('quote'+guildId,function(err,reply){
+					objq = JSON.parse(reply.toString());
+					var found = objq.find(function(element){
+						return element.name===cmd[1];
+					});
+					if(found!==undefined){
 						em.setTitle("**"+cmd[1]+"**");
 						em.setDescription("_"+objq[j].text+"_");
 						message.channel.send(em);
 						return;
 					}
-				} */
+				});
 				return;
 			/*Return id of an user*/
 			case 'abcdef':
