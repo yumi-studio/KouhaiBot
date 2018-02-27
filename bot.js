@@ -52,7 +52,9 @@ client.on('message', message => {
 					/* Check permission */
 					if(sender.id===bossId || message.member.permissions.FLAGS==='ADMINISTRATOR'){
 						rdc.get("quote"+guildId,function(err,reply){
-							objq = JSON.parse(reply.toString());
+							if(reply!==null){
+								objq = JSON.parse(reply.toString());
+							}
 						});
 						
 						/*Create new quote*/
