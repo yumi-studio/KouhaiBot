@@ -47,12 +47,11 @@ client.on('message', message => {
 			/*Quote*/
 			case 'quote':
 				var guildId = message.guild.id;
-				var objq = [];
-				rdc.get("quote"+guildId,function(err,obj){
-					objq = JSON.parse(obj);
-				});
+				var objq =[];
 				if(cmd[1]==='add'){
-					
+					/* rdc.get("quote"+guildId,function(err,obj){
+						objq = JSON.parse(obj);
+					}); */
 					/* Check permission */
 					if(sender.id!==bossId){
 						message.channel.send("You dont have permission to use this command.");
@@ -68,12 +67,18 @@ client.on('message', message => {
 						name: cmd[2],
 						text: q
 					};
-					rdc.set('quote'+guildId,JSON.stringify(objq),function(){
+					
+					objq.push(newobj);
+					objq = JSON.stringify(objq);
+					rdc.set('quote'+guildId,objq,function(){
 						message.channel.send("New quote **"+newobj.name+"** is added.");
 					});
 					return;
 				}
-				
+				objq = rdc.get('quote'+guildId,function(err,reply){
+					message.channel.send(reply.toString());
+				});
+				/* 
 				for(var j=0;j<objq.length;j++){
 					if(cmd[1]===objq[j].name){
 						em.setTitle("**"+cmd[1]+"**");
@@ -81,7 +86,7 @@ client.on('message', message => {
 						message.channel.send(em);
 						return;
 					}
-				}
+				} */
 				return;
 			/*Return id of an user*/
 			case 'abcdef':
@@ -107,18 +112,6 @@ client.on('message', message => {
 			case 'inviteme':
 				message.channel.send('https://discordapp.com/api/oauth2/authorize?client_id=413384938965172255&permissions=0&scope=bot');
 				return;
-				
-			/*Play music*/
-			/* case 'play':
-				var link = cmd[1];
-				var streamOptions = { seek: 0, volume: 1 };
-				message.member.voiceChannel.join()
-				  .then(connection => {
-					const stream = ytdl(link, { filter : 'audioonly' });
-					const dispatcher = connection.playStream(stream, streamOptions);
-				  })
-				  .catch(console.error);
-				return; */
 				
 			/*Werewolve*/
 			case 'masoi':{
