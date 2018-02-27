@@ -75,16 +75,20 @@ client.on('message', message => {
 					});
 					return;
 				}
+				
 				rdc.get('quote'+guildId,function(err,reply){
-					objq = JSON.parse(reply.toString());
-					var found = objq.find(function(element){
-						return element.name===cmd[1];
-					});
-					if(found!==undefined){
-						em.setTitle("**"+cmd[1]+"**");
-						em.setDescription("_"+found.text+"_");
-						message.channel.send(em);
-						return;
+					if(reply!==null){
+						objq = JSON.parse(reply.toString());
+						var found = objq.find(function(element){
+							return element.name===cmd[1];
+						});
+						if(found!==undefined){
+							em.setTitle("**"+cmd[1]+"**");
+							em.setDescription("_"+found.text+"_");
+							message.channel.send(em);
+						}
+					}else{
+						message.channel.send("This server dont have any quote");
 					}
 				});
 				return;
