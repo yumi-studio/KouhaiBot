@@ -82,7 +82,7 @@ client.on('message', message => {
 					});
 					if(found!==undefined){
 						em.setTitle("**"+cmd[1]+"**");
-						em.setDescription("_"+objq[j].text+"_");
+						em.setDescription("_"+found.text+"_");
 						message.channel.send(em);
 						return;
 					}
