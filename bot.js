@@ -9,6 +9,13 @@ var rdc = require('redis').createClient(process.env.REDIS_URL);
 const prefix = '!';
 const bossId = process.env.BOSS_ID;
 
+function isboss(x){
+	if(x===bossId){
+		return true;
+	}
+	return false;
+}
+
 client.on('ready', () => {
 	client.user.setActivity('Yui-senpai with love');
 	console.log('bot is ready');
@@ -120,6 +127,11 @@ client.on('message', message => {
 			case 'inviteme':
 				message.channel.send('https://discordapp.com/api/oauth2/authorize?client_id=413384938965172255&permissions=0&scope=bot');
 				return;
+				
+			case "name":
+				if(isboss(sender.id)){
+					client.user.setUsername(cmd[1]);
+				}
 				
 			/*Werewolve*/
 			case 'masoi':{
