@@ -47,6 +47,10 @@ client.on('message', message => {
 			/*Quote*/
 			case 'quote':
 				var guildId = message.guild.id;
+				var objq = [];
+				rdc.get("quote"+guildId,function(err,obj){
+					objq = JSON.parse(obj);
+				}
 				if(cmd[1]==='add'){
 					
 					/* Check permission */
@@ -60,15 +64,24 @@ client.on('message', message => {
 					for(var i=3;i<cmd.length;i++){
 						q = q +' '+ cmd[i];
 					}
-					rdc.hmset('quote'+guildId+cmd[2],q,function(err,res){
-						message.channel.send("New quote **"+cmd[2]+"** is added.");
+					var newobj = {
+						name: cmd[2],
+						text: q
+					};
+					rdc.set('quote'+guildId,JSON.stringify(objq),function(){
+						message.channel.send("New quote **"+newobj.name+"** is added.");
 					});
 					return;
 				}
 				
-				rdc.get('quote'+guildId+cmd[2],function(err,reply){
-					message.channel.send(reply.toString());
-				});
+				for(var j=0;j<objq.length;j++){
+					if(cmd[1]===objq[j].name){
+						em.setTitle("**"+cmd[1]+"**");
+						em.setDescription("_"+objq[j].text+"_");
+						message.channel.send(em);
+						return;
+					}
+				}
 				return;
 			/*Return id of an user*/
 			case 'abcdef':
