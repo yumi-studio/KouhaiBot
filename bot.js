@@ -169,6 +169,8 @@ client.on('message', message => {
 								channel.send(message.member.displayName+" joined");
 							});
 						}
+					}else{
+						channel.send("Error. Can't push new player");
 					}
 				});
 				return;
