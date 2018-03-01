@@ -5,10 +5,7 @@ const client = new Discord.Client();
 const fs = require('fs');
 
 var rdc = require('redis').createClient(process.env.REDIS_URL);
-var Game = {
-		stat: 0,
-		Player: []
-	}
+
 const prefix = '!';
 const bossId = process.env.BOSS_ID;
 
@@ -30,6 +27,10 @@ client.on('message', message => {
 	var channel = message.channel;
 	var content = message.content;
 	var em = new Discord.RichEmbed();
+	var Game = {
+		stat: 0,
+		Player: []
+	}
 	if(content.substring(0,1) === prefix && channel.type!=='dm'){
 		var cmd = content.substring(1,message.content.length).split(' ');
 		switch(cmd[0]){
