@@ -28,7 +28,7 @@ client.on('message', message => {
 	var content = message.content;
 	var em = new Discord.RichEmbed();
 	var Game = {
-		stat: "0",
+		stat: 0,
 		Player: []
 	}
 	if(content.substring(0,1) === prefix && channel.type!=='dm'){
@@ -151,17 +151,15 @@ client.on('message', message => {
 						return;
 					}
 				}
-				
+				Game.stat=1;
 				rdc.set("masoi"+guild.id,JSON.stringify(Game),function(){
 					channel.send("Game start! Type **!join** to join");
 				});
 				return;
 				
 			case "join":
-				channel.send("B1");
 				rdc.get("masoi"+guild.id,function(err,reply){
 					if(reply!==undefined){
-						channel.send("B2");
 						Game = JSON.parse(reply.toString());
 						if(Game.stat===1){
 							Game.Player.push({
@@ -172,8 +170,6 @@ client.on('message', message => {
 								channel.send(message.member.displayName+" joined");
 							});
 						}
-					}else{
-						channel.send("Error. Can't push new player");
 					}
 				});
 				return;
