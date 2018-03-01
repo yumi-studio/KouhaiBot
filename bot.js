@@ -145,9 +145,8 @@ client.on('message', message => {
 					channel.send('you dont have enough permission.');
 					return;
 				}else{
-					if()
-					if(channel.name!=="Game"){
-						channel.send("Please using #Game_channel");
+					if(channel.name!=="game"){
+						channel.send("Please using #game channel");
 						return;
 					}
 				}
