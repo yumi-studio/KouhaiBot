@@ -179,8 +179,9 @@ client.on('message', message => {
 					if(reply!==undefined){
 						Game = JSON.parse(reply.toString());
 						for(var a =0;a<Game.Player.length;a++){
-							em.addField(""+(a+1)+"."+guild.members.find("id",Game.Player[a].id).displayName,"");
+							em.addField(""+(a+1)+"."+guild.members.find("id",Game.Player[a].id).displayName,"Role:"+Game.Player[a].role);
 						}
+						channel.send(em);
 					}
 				});
 				return;
