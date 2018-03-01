@@ -170,7 +170,7 @@ client.on('message', message => {
 							});
 						}
 					}
-				};
+				});
 				return;
 			case "players":
 				rdc.get("masoi"+guild.id,function(err,reply){
