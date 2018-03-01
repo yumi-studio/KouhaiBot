@@ -167,10 +167,10 @@ client.on('message', message => {
 							});
 							rdc.set("masoi"+guild.id,JSON.stringify(Game),function(){
 								channel.send(message.member.displayName+" joined");
-							})
+							});
 						}
 					}
-				}
+				};
 				return;
 			case "players":
 				rdc.get("masoi"+guild.id,function(err,reply){
@@ -180,7 +180,7 @@ client.on('message', message => {
 							em.addField(""+(a+1)+"."+guild.members.find("id",Game.Player[a].id).displayName,"");
 						}
 					}
-				}
+				};
 				return;
 			}	
 	}
