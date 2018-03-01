@@ -180,7 +180,7 @@ client.on('message', message => {
 							em.addField(""+(a+1)+"."+guild.members.find("id",Game.Player[a].id).displayName,"");
 						}
 					}
-				};
+				});
 				return;
 			}	
 	}
