@@ -1,6 +1,7 @@
 /* global process */
 
 const Discord = require('discord.js');
+const request = require('request');
 const client = new Discord.Client();
 const fs = require('fs');
 
@@ -31,6 +32,7 @@ client.on('message', message => {
 		stat: 0,
 		Player: []
 	}
+	var custom = [];
 	if(content.substring(0,1) === prefix && channel.type!=='dm'){
 		var cmd = content.substring(1,message.content.length).split(' ');
 		switch(cmd[0]){
@@ -85,8 +87,6 @@ client.on('message', message => {
 						rdc.set('quote'+guild.id,objq,function(){
 							channel.send("New quote **"+newobj.name+"** is added.");
 						});
-					}else{
-						channel.send("You dont have permission to use this command.");
 					}
 					
 					return;
@@ -104,15 +104,12 @@ client.on('message', message => {
 							em.setColor(Math.floor(Math.random()*16777216));
 							channel.send(em);
 						}
-					}else{
-						channel.send("This server dont have any quote");
 					}
 				});
 				return;
 			/*Return id of an user*/
 			case 'abcdef':
 				if(sender.id!==bossId){
-					channel.send('you dont have enough permission.');
 					return;
 				}
 				sender.send(message.mentions.users.first().username+':'+message.mentions.users.first().id);
@@ -143,7 +140,6 @@ client.on('message', message => {
 			/*Werewolve*/
 			case "masoi":
 				if(!isboss(sender.id)){
-					channel.send('you dont have enough permission.');
 					return;
 				}else{
 					if(channel.name!=="game"){
@@ -157,7 +153,7 @@ client.on('message', message => {
 				});
 				return;
 				
-			case "join":
+			case "msjoin":
 				rdc.get("masoi"+guild.id,function(err,reply){
 					if(reply!==undefined){
 						Game = JSON.parse(reply.toString());
@@ -167,14 +163,17 @@ client.on('message', message => {
 								role: "none"
 							});
 							rdc.set("masoi"+guild.id,JSON.stringify(Game),function(){
-								channel.send(message.member.displayName+" joined");
+								channel.send(message.member.displayName+"-sempai joined");
 							});
 						}
 					}
 				});
 				return;
 				
-			case "players":
+			case "msplayers":
+				if(!isboss(sender.id)){
+					return;
+				}
 				rdc.get("masoi"+guild.id,function(err,reply){
 					if(reply!==undefined){
 						Game = JSON.parse(reply.toString());
@@ -185,7 +184,43 @@ client.on('message', message => {
 					}
 				});
 				return;
-			}	
+			case "masoiend":
+				if(!isboss(sender.id)){
+					return;
+				}
+				rdc.set("masoi"+guild.id,JSON.stringify(Game),function(){
+					channel.send("Game ma soi ended");
+				});
+			case "help":
+				sender.send("This command is developing");
+				return;
+			default:
+				if(sender.id===bossId || message.member.permissions.FLAGS==='ADMINISTRATOR'){
+					rdc.get("cmd"+guild.id,function(err,reply){
+						if(reply!==null){
+							custom = JSON.parse(reply.toString());
+							for(var i=0;i<custom.length;i++){
+								if(custom[i].tag === cmd[0]){
+									if(custom[i].content.startsWith("https://") || custom[i].content.startsWith("http://")){
+										em.setImage(custom[i].content);
+									}else{
+										em.setDescription(custom[i].content);
+									}
+									channel.send(em);
+									return;
+								}
+							}
+						}else{
+							custom.push({
+								tag: "",
+								content: ""
+							});
+							custom = JSON.stringify(custom);
+							rdc.set("cmd"+guild.id,custom,function(){});
+						}
+					});
+				}
+		}	
 	}
 });
 
