@@ -194,32 +194,42 @@ client.on('message', message => {
 			case "help":
 				sender.send("This command is developing");
 				return;
-			default:
+			case "addcmd":
 				if(sender.id===bossId || message.member.permissions.FLAGS==='ADMINISTRATOR'){
 					rdc.get("cmd"+guild.id,function(err,reply){
-						if(reply!==null){
-							custom = JSON.parse(reply.toString());
-							for(var i=0;i<custom.length;i++){
-								if(custom[i].tag === cmd[0]){
-									if(custom[i].content.startsWith("https://") || custom[i].content.startsWith("http://")){
-										em.setImage(custom[i].content);
-									}else{
-										em.setDescription(custom[i].content);
-									}
-									channel.send(em);
-									return;
-								}
-							}
-						}else{
-							custom.push({
-								tag: "",
-								content: ""
-							});
-							custom = JSON.stringify(custom);
-							rdc.set("cmd"+guild.id,custom,function(){});
-						}
+						custom = JSON.parse(reply.toString());
 					});
+					custom.push({
+						tag: cmd[1],
+						content: cmd[2]
+					});
+					custom= JSON.stringify(custom);
+					rdc.set("cmd"+guild.id,custom,function(){});
 				}
+			default:
+				rdc.get("cmd"+guild.id,function(err,reply){
+					if(reply!==null){
+						custom = JSON.parse(reply.toString());
+						for(var i=0;i<custom.length;i++){
+							if(custom[i].tag === cmd[0]){
+								if(custom[i].content.startsWith("https://") || custom[i].content.startsWith("http://")){
+									em.setImage(custom[i].content);
+								}else{
+									em.setDescription(custom[i].content);
+								}
+								channel.send(em);
+								return;
+							}
+						}
+					}else{
+						custom.push({
+							tag: "",
+							content: ""
+						});
+						custom = JSON.stringify(custom);
+						rdc.set("cmd"+guild.id,custom,function(){});
+					}
+				});
 		}	
 	}
 });
