@@ -197,7 +197,7 @@ client.on('message', message => {
 			case "addcmd":
 				if(sender.id===bossId || message.member.permissions.FLAGS==='ADMINISTRATOR'){
 					rdc.get("cmd"+guild.id,function(err,reply){
-						if(reply===undefined){
+						if(reply===undefined || reply===null){
 							custom = JSON.stringify(custom);
 							rdc.set("cmd"+guild.id,custom,function(){});
 							return;
