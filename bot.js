@@ -197,6 +197,11 @@ client.on('message', message => {
 			case "addcmd":
 				if(sender.id===bossId || message.member.permissions.FLAGS==='ADMINISTRATOR'){
 					rdc.get("cmd"+guild.id,function(err,reply){
+						if(reply===undefined){
+							custom = JSON.stringify(custom);
+							rdc.set("cmd"+guild.id,custom,function(){});
+							return;
+						}
 						custom = JSON.parse(reply.toString());
 					});
 					custom.push({
@@ -206,6 +211,7 @@ client.on('message', message => {
 					custom= JSON.stringify(custom);
 					rdc.set("cmd"+guild.id,custom,function(){});
 				}
+				return;
 			default:
 				rdc.get("cmd"+guild.id,function(err,reply){
 					if(reply!==null){
@@ -221,13 +227,6 @@ client.on('message', message => {
 								return;
 							}
 						}
-					}else{
-						custom.push({
-							tag: "",
-							content: ""
-						});
-						custom = JSON.stringify(custom);
-						rdc.set("cmd"+guild.id,custom,function(){});
 					}
 				});
 		}	
