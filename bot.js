@@ -212,6 +212,23 @@ client.on('message', message => {
 					rdc.set("cmd"+guild.id,custom,function(){});
 				}
 				return;
+			case "delcmd":
+				if(sender.id===bossId || message.member.permissions.FLAGS==='ADMINISTRATOR'){
+					rdc.get("cmd"+guild.id,function(err,reply){
+						if(reply===undefined || reply===null){
+							return;
+						}
+						custom = JSON.parse(reply.toString());
+					});
+					var i = custom.findIndex(function(element){
+						return element.tag===cmd[1];
+					});
+					if(i===-1)	return;
+					custom.splice(i,i+1);
+					custom= JSON.stringify(custom);
+					rdc.set("cmd"+guild.id,custom,function(){});
+				}
+				return;
 			default:
 				rdc.get("cmd"+guild.id,function(err,reply){
 					if(reply!==null){
