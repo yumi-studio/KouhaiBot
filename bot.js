@@ -230,7 +230,7 @@ client.on('message', message => {
 				return;
 			case "delallcmd":
 				if(sender.id===bossId || message.member.permissions.FLAGS==='ADMINISTRATOR'){
-					custom= JSON.parse(custom);
+					custom= JSON.stringify(custom);
 					rdc.set("cmd"+guild.id,custom,function(err,reply){
 						channel.send("All custom commands is deleted");
 					});
