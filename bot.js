@@ -199,6 +199,9 @@ client.on('message', message => {
 					rdc.get("cmd"+guild.id,function(err,reply){
 						if(reply!==null){
 							custom = JSON.parse(reply.toString());
+							channel.send("doc thanh cong");
+						}else{
+							channel.send("doc that bai");
 						}
 					});
 					channel.send("truoc khi add:" + JSON.stringify(custom));
@@ -237,9 +240,9 @@ client.on('message', message => {
 				return;
 			case "customcmd":
 				rdc.get("cmd"+guild.id,function(err,reply){
-						if(reply!==null){
-							channel.send(reply.toString());
-						}
+					if(reply!==null){
+						channel.send(reply.toString());
+					}
 				});
 				return;
 			default:
