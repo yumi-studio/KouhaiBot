@@ -207,8 +207,7 @@ client.on('message', message => {
 						content: cmd[2]
 					});
 					
-					custom= JSON.stringify(custom);
-					rdc.set("cmd"+guild.id,custom,function(){});
+					rdc.set("cmd"+guild.id,JSON.stringify(custom);,function(){});
 				}
 				return;
 			case "delcmd":
@@ -236,6 +235,13 @@ client.on('message', message => {
 					});
 				}
 				return;
+			case "customcmd":
+				rdc.get("cmd"+guild.id,function(err,reply){
+						if(reply!==null){
+							channel.send(reply.toString());
+						}
+				});
+				return;
 			default:
 				rdc.get("cmd"+guild.id,function(err,reply){
 					if(reply!==null){
@@ -252,7 +258,6 @@ client.on('message', message => {
 							channel.send(em);
 							return;
 						}
-								
 					}
 				});
 		}	
