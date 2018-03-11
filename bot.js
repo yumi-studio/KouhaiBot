@@ -232,17 +232,19 @@ client.on('message', message => {
 				rdc.get("cmd"+guild.id,function(err,reply){
 					if(reply!==null){
 						custom = JSON.parse(reply.toString());
-						for(var i=0;i<custom.length;i++){
-							if(custom[i].tag === cmd[0]){
-								if(custom[i].content.startsWith("https://") || custom[i].content.startsWith("http://")){
-									em.setImage(custom[i].content);
-								}else{
-									em.setDescription(custom[i].content);
-								}
-								channel.send(em);
-								return;
+						var found = custom.find(function(element){
+							return element.tag===cmd[0];
+						});
+						if(found!==undefined){
+							if(found.content.startsWith("https://") || custom[i].content.startsWith("http://")){
+								em.setImage(found.content);
+							}else{
+								em.setDescription(found.content);
 							}
+							channel.send(em);
+							return;
 						}
+								
 					}
 				});
 		}	
