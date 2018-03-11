@@ -194,6 +194,8 @@ client.on('message', message => {
 			case "help":
 				sender.send("This command is developing");
 				return;
+				
+			/*Add custom command*/
 			case "addcmd":
 				if(sender.id===bossId || message.member.permissions.FLAGS==='ADMINISTRATOR'){
 					rdc.get("cmd"+guild.id,function(err,reply){
@@ -213,23 +215,23 @@ client.on('message', message => {
 					});
 				}
 				return;
+			/*Delete a custom command*/
 			case "delcmd":
 				if(sender.id===bossId || message.member.permissions.FLAGS==='ADMINISTRATOR'){
 					rdc.get("cmd"+guild.id,function(err,reply){
-						if(reply===null){
-							return;
+						if(reply!==null){
+							custom = JSON.parse(reply.toString());
+							var i = custom.findIndex(function(element){
+								return element.tag===cmd[1];
+							});
+							if(i===-1)	return;
+							custom.splice(i,1);
+							rdc.set("cmd"+guild.id,JSON.stringify(custom),function(){});
 						}
-						custom = JSON.parse(reply.toString());
 					});
-					var i = custom.findIndex(function(element){
-						return element.tag===cmd[1];
-					});
-					if(i===-1)	return;
-					custom.splice(i,i+1);
-					custom= JSON.stringify(custom);
-					rdc.set("cmd"+guild.id,custom,function(){});
 				}
 				return;
+			/*Delete all custom commands*/
 			case "delallcmd":
 				if(sender.id===bossId || message.member.permissions.FLAGS==='ADMINISTRATOR'){
 					custom= JSON.stringify(custom);
@@ -238,6 +240,7 @@ client.on('message', message => {
 					});
 				}
 				return;
+			/*Show list of custom commands*/
 			case "customcmd":
 				rdc.get("cmd"+guild.id,function(err,reply){
 					if(reply!==null){
@@ -245,6 +248,8 @@ client.on('message', message => {
 					}
 				});
 				return;
+			
+			/**/
 			default:
 				rdc.get("cmd"+guild.id,function(err,reply){
 					if(reply!==null){
