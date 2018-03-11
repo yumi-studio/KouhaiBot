@@ -201,12 +201,12 @@ client.on('message', message => {
 							custom = JSON.parse(reply.toString());
 						}
 					});
-					
+					channel.send("truoc khi add:" + JSON.stringify(custom));
 					custom.push({
 						tag: cmd[1],
 						content: cmd[2]
 					});
-					channel.send(JSON.stringify(custom));
+					channel.send("sau khi add"+JSON.stringify(custom));
 					rdc.set("cmd"+guild.id,JSON.stringify(custom),function(){});
 				}
 				return;
