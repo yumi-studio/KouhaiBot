@@ -244,7 +244,7 @@ client.on('message', message => {
 							return element.tag===cmd[0];
 						});
 						if(found!==undefined){
-							if(found.content.startsWith("https://") || custom[i].content.startsWith("http://")){
+							if(found.content.startsWith("https://") || found.content.startsWith("http://")){
 								em.setImage(found.content);
 							}else{
 								em.setDescription(found.content);
