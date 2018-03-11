@@ -200,17 +200,17 @@ client.on('message', message => {
 						if(reply!==null){
 							custom = JSON.parse(reply.toString());
 							channel.send("doc thanh cong");
+							channel.send("truoc khi add:" + JSON.stringify(custom));
+							custom.push({
+								tag: cmd[1],
+								content: cmd[2]
+							});
+							channel.send("sau khi add"+JSON.stringify(custom));
+							rdc.set("cmd"+guild.id,JSON.stringify(custom),function(){});
 						}else{
 							channel.send("doc that bai");
 						}
 					});
-					channel.send("truoc khi add:" + JSON.stringify(custom));
-					custom.push({
-						tag: cmd[1],
-						content: cmd[2]
-					});
-					channel.send("sau khi add"+JSON.stringify(custom));
-					rdc.set("cmd"+guild.id,JSON.stringify(custom),function(){});
 				}
 				return;
 			case "delcmd":
