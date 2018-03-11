@@ -207,7 +207,7 @@ client.on('message', message => {
 						content: cmd[2]
 					});
 					
-					rdc.set("cmd"+guild.id,JSON.stringify(custom);,function(){});
+					rdc.set("cmd"+guild.id,JSON.stringify(custom),function(){});
 				}
 				return;
 			case "delcmd":
