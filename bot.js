@@ -206,7 +206,7 @@ client.on('message', message => {
 						tag: cmd[1],
 						content: cmd[2]
 					});
-					
+					channel.send(JSON.stringify(custom));
 					rdc.set("cmd"+guild.id,JSON.stringify(custom),function(){});
 				}
 				return;
