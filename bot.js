@@ -7,14 +7,6 @@ const fs = require('fs');
 var rdc = require('redis').createClient(process.env.REDIS_URL);
 
 const prefix = '!';
-const bossId = process.env.BOSS_ID;
-
-function isboss(x){
-	if(x===bossId){
-		return true;
-	}
-	return false;
-}
 
 client.on('ready', () => {
 	client.user.setActivity('Yui-senpai with love');
@@ -29,7 +21,7 @@ client.on('message', message => {
 	try{
 		let cmdDir = "./commands/"+cmd+".js";
 		let cmdFile = require(cmdDir);
-		cmdFile.run(Discord,rdc,client,message,cmd);
+		cmdFile.run(Discord,rdc,client,message,args);
 	}catch(err){
 		console.log(err);
 	}
