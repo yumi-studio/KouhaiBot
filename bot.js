@@ -22,52 +22,17 @@ client.on('ready', () => {
 });
 
 client.on('message', message => {
-	/* var sender= message.author;
-	var guild = message.guild;
-	var channel = message.channel;
-	var content = message.content;
-	var em = new Discord.RichEmbed();
-	var Game = {
-		stat: 0,
-		Player: []
-	}
-	var custom = []; */
 	if(message.author.bot) return;
 	if(message.content.substring(0,1) !== prefix || message.channel.type==='dm') return;
-	const cmd = message.content.substring(1,message.content.length).split(' ');
+	const cmd = message.content.substring(1).split(" ")[0];
+	const args = message.content.substring(cmd+2);
 	try{
-		let cmdDir = "./commands/"+cmd[0]+".js";
+		let cmdDir = "./commands/"+cmd+".js";
 		let cmdFile = require(cmdDir);
 		cmdFile.run(Discord,rdc,client,message,cmd);
 	}catch(err){
 		console.log(err);
 	}
-		// switch(cmd[0]){
-			
-			// /*meme*/
-			// case 'hhh':
-				// em.setImage('https://i.imgur.com/ojjWsjK.jpg');
-				// channel.send(em);
-				// return;
-			// case 'pff':
-				// em.setImage('https://i.imgur.com/nacjQtW.jpg');
-				// channel.send(em);
-				// return;
-			// case 'ym':
-				// em.setImage('https://i.imgur.com/5218yLa.jpg');
-				// channel.send(em);
-				// return;
-			
-			// /*--------------------------------*/
-			// /*Random a selection*/
-			// case 'roll':
-				// var opt = cmd[1].split('-');
-				// var num= opt.length;
-				// if(num>1){
-					// channel.send(opt[Math.floor(Math.random()*num)]);
-				// }
-				// return;
-			// /*Quote*/
 			// case 'quote':
 				// var objq =[];
 				// if(cmd[1]==='add'){
