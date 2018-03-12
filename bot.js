@@ -35,9 +35,9 @@ client.on('message', message => {
 	if(message.author.bot) return;
 	if(message.content.substring(0,1) !== prefix || message.channel.type==='dm') return;
 	const cmd = message.content.substring(1,message.content.length).split(' ');
-	var cmdd= cmd[0];
 	try{
-		let cmdFile = require('./commands/${cmdd}.js');
+		let cmdDir = "./commands/"+cmd[0]+".js";
+		let cmdFile = require(cmdDir);
 		cmdFile.run(client,message,cmd);
 	}catch(err){
 		console.log(err);
