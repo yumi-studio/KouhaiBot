@@ -38,7 +38,7 @@ client.on('message', message => {
 	try{
 		let cmdDir = "./commands/"+cmd[0]+".js";
 		let cmdFile = require(cmdDir);
-		cmdFile.run(client,message,cmd);
+		cmdFile.run(Discord,rdc,client,message,cmd);
 	}catch(err){
 		console.log(err);
 	}
