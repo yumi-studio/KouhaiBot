@@ -25,31 +25,6 @@ client.on('message', message => {
 	}catch(err){
 		console.log(err);
 	}
-			// case 'quote':
-				// var objq =[];
-			
-				// rdc.get('quote'+guild.id,function(err,reply){
-					// if(reply!==null){
-						// objq = JSON.parse(reply.toString());
-						// var found = objq.find(function(element){
-							// return element.name===cmd[1];
-						// });
-						// if(found!==undefined){
-							// em.setTitle("**"+found.name+"**");
-							// em.setDescription('_"'+found.text+'"_');
-							// em.setColor(Math.floor(Math.random()*16777216));
-							// channel.send(em);
-						// }
-					// }
-				// });
-				// return;
-			// /*Return id of an user*/
-			// case 'abcdef':
-				// if(sender.id!==bossId){
-					// return;
-				// }
-				// sender.send(message.mentions.users.first().username+':'+message.mentions.users.first().id);
-				// return;
 			
 			// /*Return some information of member*/
 			// case 'watashi?':
