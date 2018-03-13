@@ -17,7 +17,7 @@ client.on('message', message => {
 	if(message.author.bot) return;
 	if(message.content.substring(0,1) !== prefix || message.channel.type==='dm') return;
 	const cmd = message.content.substring(1).split(" ")[0];
-	const args = message.content.substring(cmd+2);
+	const args = message.content.substring(cmd.length+2);
 	try{
 		let cmdDir = "./commands/"+cmd+".js";
 		let cmdFile = require(cmdDir);
