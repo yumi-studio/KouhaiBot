@@ -12,9 +12,15 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 				if(reply!==null){
 					list = JSON.parse(reply.toString());
 				}
+				if(cmd.indexOf("|")===-1) return;
 				let newq = {
-					name: cmd.split(" ")[1], 
-					text: cmd.substring(option.length+cmd.split(" ")[1].length+2)
+					name: cmd.split("|")[1], 
+					text: cmd.substring(option.length+cmd.split("|")[1].length+2)
+				}
+				let found = list.find(m=>m.name===newq.name);
+				if(found!==undefined){
+					channel.send("**"+newq.name+"** quote is in database. Please delete it before add new one.");
+					return;
 				}
 				list.push(newq);
 				rdc.set("quote"+guild.id,JSON.stringify(list),()=>{
@@ -23,10 +29,20 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 			});
 			return;
 		case "del":
-			
-			return;
-		case "change":
-		
+			if(sender.id!==process.env.BOSS_ID && perm!=="ADMINISTRATOR") return;
+			rdc.get("quote"+guild.id,function(err,reply){
+				if(reply!==null){
+					list = JSON.parse(reply.toString());
+				}else{
+					return;
+				}
+				let found = list.findIndex(m=>m.name===cmd.substring(option.length+1));
+				if(found===-1) return;
+				list.splice(found,1);
+				rdc.set("quote"+guild.id,JSON.stringify(list),()=>{
+					channel.send("**"+list[found].name+"** is deleted.");
+				});
+			});
 			return;
 		case "list":
 			rdc.get("quote"+guild.id,function(err,reply){
