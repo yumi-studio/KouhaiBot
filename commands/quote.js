@@ -2,7 +2,7 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 	let list =[];
 	let option = cmd.split(" ")[0];
 	let sender = message.author;
-	let perm =  message.member.permissons.FLAGS;
+	let perm =  message.member.permissions.FLAGS;
 	let guild = message.guild;
 	let channel = message.channel;
 	switch(option){

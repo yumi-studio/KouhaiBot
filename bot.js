@@ -27,35 +27,7 @@ client.on('message', message => {
 	}
 			// case 'quote':
 				// var objq =[];
-				// if(cmd[1]==='add'){
-					// /* Check permission */
-					// if(sender.id===bossId || message.member.permissions.FLAGS==='ADMINISTRATOR'){
-						// rdc.get("quote"+guild.id,function(err,reply){
-							// if(reply!==null){
-								// objq = JSON.parse(reply.toString());
-							// }
-						// });
-						
-						// /*Create new quote*/
-						// var q ='';
-						// for(var i=3;i<cmd.length;i++){
-							// q = q +' '+ cmd[i];
-						// }
-						// let newobj = {
-							// name: cmd[2],
-							// text: q
-						// };
-						
-						// objq.push(newobj);
-						// objq = JSON.stringify(objq);
-						// rdc.set('quote'+guild.id,objq,function(){
-							// channel.send("New quote **"+newobj.name+"** is added.");
-						// });
-					// }
-					
-					// return;
-				// }
-				
+			
 				// rdc.get('quote'+guild.id,function(err,reply){
 					// if(reply!==null){
 						// objq = JSON.parse(reply.toString());
