@@ -7,7 +7,7 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 	let channel = message.channel;
 	switch(option){
 		case "add":
-			if(sender.id!==process.env.BOSS_ID || perm!=="ADMINISTRATOR") return;
+			if(sender.id!==process.env.BOSS_ID && perm!=="ADMINISTRATOR") return;
 			rdc.get("quote"+guild.id,function(err,reply){
 				if(reply!==null){
 					list = JSON.parse(reply.toString());
