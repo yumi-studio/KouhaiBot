@@ -38,9 +38,9 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 				}
 				let found = list.findIndex(m=>m.name===cmd.substring(option.length+1));
 				if(found===-1) return;
-				list.splice(found,1);
+				let removed = list.splice(found,1);
 				rdc.set("quote"+guild.id,JSON.stringify(list),()=>{
-					channel.send("**"+list[found].name+"** is deleted.");
+					channel.send("**"+removed.name+"** is deleted.");
 				});
 			});
 			return;
