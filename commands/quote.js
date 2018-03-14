@@ -15,7 +15,7 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 				if(cmd.indexOf("|")===-1) return;
 				let newq = {
 					name: cmd.substring(option.length+1).split("|")[0], 
-					text: cmd.substring(option.length+cmd.split("|")[1].length+2)
+					text: cmd.substring(cmd.split("|")[0].length+2);
 				}
 				let found = list.find(m=>m.name===newq.name);
 				if(found!==undefined){

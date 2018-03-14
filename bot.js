@@ -25,29 +25,6 @@ client.on('message', message => {
 	}catch(err){
 		console.log(err);
 	}
-			
-			// /*Return some information of member*/
-			// case 'watashi?':
-				// em.setColor(Math.floor(Math.random()*16777216));
-				// em.setTitle('**'+message.member.displayName+'**');
-				// em.addField('**Realname** ',sender.username);
-				// em.addBlankField();
-				// em.addField('**Joined Time**',sender.createdAt);
-				// em.setThumbnail(sender.avatarURL);
-				// channel.send(em);
-				// return; 
-			
-			// /*Invite the bot*/
-			// case 'inviteme':
-				// channel.send('https://discordapp.com/api/oauth2/authorize?client_id=413384938965172255&permissions=0&scope=bot');
-				// return;
-				
-			// case "name":
-				// if(isboss(sender.id)){
-					// client.user.setUsername(cmd[1]);
-				// }
-				// return;
-				
 			// /*Werewolve*/
 			// case "masoi":
 				// if(!isboss(sender.id)){
