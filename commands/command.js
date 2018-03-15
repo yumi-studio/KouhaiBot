@@ -14,7 +14,11 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 				let listname ="";
 				list.forEach(m => {listname=listname + ", "+m.name});
 				listname=listname.substring(2);
-				channel.send("`"+listname+"`");
+				if(listname.length<1){
+					channel.send("No custom command.");
+				}else{
+					channel.send("`"+listname+"`");
+				}
 			}); 
 			return;
 		default:

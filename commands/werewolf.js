@@ -24,7 +24,7 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 			if(!checkperm()) return;
 			game.stat="0";
 			rdc.set("masoi"+guild.id,JSON.stringify(game),()=>{
-				channel.send("Game start! Type **!join** to join");
+				channel.send("Gameover.");
 			});
 			break;
 		case "join":
