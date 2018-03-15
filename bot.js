@@ -25,17 +25,18 @@ client.on('message', message => {
 	}catch(err){
 		/*Read custom commands */
 		console.log(err);
-		rdc.get("cmd"+guild.id,function(err,reply){
+		rdc.get("cmd"+message.guild.id,function(err,reply){
 			if(reply===null) return;
 			let custom = JSON.parse(reply.toString());
 			let found = custom.find(m=> m.name===cmd);
+			let em = new Discord.RichEmbed();
 			if(found!==undefined){
 				if(found.content.startsWith("https://") || found.content.startsWith("http://")){
 					em.setImage(found.content);
 				}else{
 					em.setDescription(found.content);
 				}
-				channel.send(em);
+				message.channel.send(em);
 				return;
 			}
 		});
