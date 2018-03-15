@@ -8,29 +8,29 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 	switch(option){
 		case "add":
 			if(sender.id!==process.env.BOSS_ID && perm!=="ADMINISTRATOR") return;
-			rdc.get("quote"+guild.id,function(err,reply){
+			rdc.get("cmd"+guild.id,function(err,reply){
 				if(reply!==null){
 					list = JSON.parse(reply.toString());
 				}
 				if(cmd.indexOf("|")===-1) return;
-				let newq = {
+				let newc = {
 					name: cmd.substring(option.length+1).split("|")[0], 
-					text: cmd.substring(cmd.split("|")[0].length+2)
+					content: cmd.substring(cmd.split("|")[0].length+2)
 				}
-				let found = list.find(m=>m.name===newq.name);
+				let found = list.find(m=>m.name===newc.name);
 				if(found!==undefined){
-					channel.send("**"+newq.name+"** quote is in database. Please delete it before add new one.");
+					channel.send("**"+newc.name+"** is in database. Please delete it before add new one.");
 					return;
 				}
-				list.push(newq);
-				rdc.set("quote"+guild.id,JSON.stringify(list),()=>{
-					channel.send("**"+newq.name+"** is added.");
+				list.push(newc);
+				rdc.set("cmd"+guild.id,JSON.stringify(list),()=>{
+					channel.send("**"+newc.name+"** is added.");
 				});
 			});
 			return;
 		case "del":
 			if(sender.id!==process.env.BOSS_ID && perm!=="ADMINISTRATOR") return;
-			rdc.get("quote"+guild.id,function(err,reply){
+			rdc.get("cmd"+guild.id,function(err,reply){
 				if(reply!==null){
 					list = JSON.parse(reply.toString());
 				}else{
@@ -38,14 +38,13 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 				}
 				let found = list.findIndex(m=>m.name===cmd.substring(option.length+1));
 				if(found===-1) return;
-				let removed = list.splice(found,1);
-				rdc.set("quote"+guild.id,JSON.stringify(list),()=>{
-					channel.send("**"+removed.name+"** is deleted.");
+				rdc.set("cmd"+guild.id,JSON.stringify(list),()=>{
+					channel.send("**"+cmd.substring(option.length+1)+"** is deleted.");
 				});
 			});
 			return;
 		case "list":
-			rdc.get("quote"+guild.id,function(err,reply){
+			rdc.get("cmd"+guild.id,function(err,reply){
 				if(reply===null)	return;
 				list=JSON.parse(reply.toString());
 				let listname ="";
@@ -54,17 +53,5 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 				channel.send("`"+listname+"`");
 			});
 			return;
-		default:
-			rdc.get("quote"+guild.id,function(err,reply){
-				if(reply===null)	return;
-				list=JSON.parse(reply.toString());
-				let found = list.find(m => m.name===option);
-				if(found===undefined) return;
-				let em = new Discord.RichEmbed();
-				em.setTitle("**"+found.name+"**");
-				em.setDescription('_"'+found.text+'"_');
-				em.setColor(Math.floor(Math.random()*16777216));
-				channel.send(em);
-			});
 	}
 }
