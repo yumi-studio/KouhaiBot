@@ -38,6 +38,7 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 				}
 				let found = list.findIndex(m=>m.name===cmd.substring(option.length+1));
 				if(found===-1) return;
+				list.splice(found,1);
 				rdc.set("cmd"+guild.id,JSON.stringify(list),()=>{
 					channel.send("**"+cmd.substring(option.length+1)+"** is deleted.");
 				});
