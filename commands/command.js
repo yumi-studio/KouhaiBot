@@ -18,7 +18,7 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 			}); 
 			return;
 		default:
-			if(arg2 === null){
+			if(arg2.length <1){
 				del();
 			}else{
 				set();
