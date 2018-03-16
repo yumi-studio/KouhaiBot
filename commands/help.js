@@ -4,7 +4,10 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 	em.setDescription("Here is something Senpai can do with me (◠﹏◠✿)");
 	em.addBlankField();
 	em.addField("inviteme",`	(✿┛◉Д◉)┛彡┻━┻  Senpai want to see me Hand-In-Hand with another people`);
-	em.addField("roll","Senpai, do you want to play a guess game? ★~(◡﹏◕✿)");
+	em.addField("roll",
+	`Senpai, do you want to play a guess game? ★~(◡﹏◕✿)
+	Ex: I have two choices _yes_ and _no_ , just type **!roll yes|no** and I will chose answer for senpai.
+	`);
 	em.addField("watashi",	`	I will show your information, Senpai (●´ω｀●)`);
 	em.addField("werewolf",	`	Yui-oniichan is working with this thing, so please wait (◕ω◕✿)`);
 	em.addField("command",`
