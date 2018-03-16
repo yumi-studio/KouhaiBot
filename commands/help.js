@@ -9,12 +9,12 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 	em.addField("werewolf","Yui-oniichan is working with this thing, so please wait (◕ω◕✿)");
 	em.addField("command",`
 		This can create custom command, delete custom command or modify exist command (∪ ◡ ∪)
-		(´･ω･``) Let's take a look. 
+		(´･ω･\`) Let's take a look. 
 		Ex: I want to create **senpai** command, first I need type _!command senpai somethingsweetie_
 			then if **senpai** is a custom command, senpai can edit it with _!command senpai otherthingsweetie_
 			if **senpai** is not needed anymore, senpai type _!command senpai_ with nothing sweetie and **senpai** will be deleted.
 			But note that: ONLY Yui-oniichan or Senpai's permission is ADMINISTRATOR can create, delete or modify ✿◕ ‿ ◕✿
 			Okay so how can senpai use it? too ez, just type **senpai** and senpai will see "somethingsweetie" in chat (◡‿◡✿)
 	`);
-	message.author.send();
+	message.author.send(em);
 }
