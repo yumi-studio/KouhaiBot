@@ -3,10 +3,10 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 	em.setTitle(`You don't know what you can do with me,${message.author.username} senpai`);
 	em.setDescription("Here is something Senpai can do with me (◠﹏◠✿)");
 	em.addBlankField();
-	em.addField("inviteme","(✿┛◉Д◉)┛彡┻━┻  Senpai want to see me Hand-In-Hand with another people");
+	em.addField("inviteme",`	(✿┛◉Д◉)┛彡┻━┻  Senpai want to see me Hand-In-Hand with another people`);
 	em.addField("roll","Senpai, do you want to play a guess game? ★~(◡﹏◕✿)");
-	em.addField("watashi","I will show your information, Senpai (●´ω｀●)");
-	em.addField("werewolf","Yui-oniichan is working with this thing, so please wait (◕ω◕✿)");
+	em.addField("watashi",	`	I will show your information, Senpai (●´ω｀●)`);
+	em.addField("werewolf",	`	Yui-oniichan is working with this thing, so please wait (◕ω◕✿)`);
 	em.addField("command",`
 		This can create custom command, delete custom command or modify exist command (∪ ◡ ∪)
 		(´･ω･\`) Let's take a look. 
