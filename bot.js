@@ -9,7 +9,7 @@ var rdc = require('redis').createClient(process.env.REDIS_URL);
 const prefix = '!';
 
 client.on('ready', () => {
-	client.user.setActivity('Yui-senpai with love');
+	client.user.setActivity('Yui-senpai w/ !help');
 	console.log('bot is ready');
 });
 
@@ -32,7 +32,7 @@ client.on('message', message => {
 			let em = new Discord.RichEmbed();
 			if(found!==undefined){
 				if(found.content.startsWith("https://") || found.content.startsWith("http://")){
-					em.setImage(found.content);
+					em.setImage(found.content,200);
 				}else{
 					em.setDescription(found.content);
 				}

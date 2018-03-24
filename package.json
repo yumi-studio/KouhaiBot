@@ -9,6 +9,7 @@
   "dependencies": {
     "dictionary-en-us": "^2.0.0",
     "discord.js": "11.3.0",
+    "pngjs-draw": "0.0.6",
     "redis": "^2.8.0",
     "request": "2.81.0"
   }
