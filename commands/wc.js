@@ -24,13 +24,10 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
             
             return;
         case "l":
-            let list2 ="```";
-            let i=0;
-            list.forEach(m=>{
-                list2+= i +":"+ m[i]+ "/n";
-                i++;
-            })
-            list2+="```";
+            let list2 ="";
+            for(let i=0;i<list.length;i++){
+                list2 = list2 + `${i}:${list[i]} /n`; 
+            }
             channel.send(list2);
             return;
         default:
