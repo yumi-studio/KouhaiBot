@@ -14,7 +14,7 @@ client.on('ready', () => {
 
 client.on('guildMemberAdd',member=>{
 	rdc.get("welcome"+member.guild.id,(err,reply)=>{
-		let channel = member.guild.channels.first();
+		let channel = member.guild.defaultChannel;
 		if(reply===null) channel.send(`Have a great day,${member} senpai`);
 	});
 });
