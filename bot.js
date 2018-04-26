@@ -12,6 +12,12 @@ client.on('ready', () => {
 	console.log('bot is ready');
 });
 
+client.on('guildMemberAdd',member=>{
+	rdc.get("welcome"+member.guild.id,(err,reply)=>{
+		if(reply===null) member.guild.channels[0].send(`Have a good day, ${member} senpai!`);
+	});
+});
+
 client.on('message', message => {
 	if(message.author.bot) return;
 	if(message.content.substring(0,1) !== prefix || message.channel.type==='dm') return;
