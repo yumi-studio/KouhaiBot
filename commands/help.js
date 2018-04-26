@@ -22,5 +22,5 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 	// message.author.send(em);
 	em.setTitle("KOUHAIBOT COMMANDS LIST");
 	em.setUrl("https://yumichannel.github.io/discord");
-	message.channel.send(em);
+	message.channel.send("",em);
 }
