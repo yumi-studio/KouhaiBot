@@ -11,25 +11,27 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
         if(reply!==null){
             list = JSON.parse(reply.toString());
         }
+        switch(opt){
+            case "a":
+                if(wcmsg.lenght<=0) return;
+                list.push(wcmsg);
+                rdc.set("welcome"+guild.id,JSON.stringify(list),()=>{
+                    channel.send("Added new greeting message! Check greeting list with **!wc l**");
+                });
+                return;
+            case "x":
+                list = [];
+                rdc.set("welcome"+guild.id,JSON.stringify(list),()=>{});
+                return;
+            case "l":
+                let list2 ="";
+                for(let i=0;i<list.length;i++){
+                    list2 = list2 + `${i}:${list[i]} /n`; 
+                }
+                channel.send("```"+list2+"```");
+                return;
+            default:
+        }
     });
-    switch(opt){
-        case "a":
-            if(wcmsg.lenght<=0) return;
-            list.push(wcmsg);
-            rdc.set("welcome"+guild.id,JSON.stringify(list),()=>{
-                channel.send("Added new greeting message! Check greeting list with **!wc l**");
-            });
-            return;
-        case "d":
-            
-            return;
-        case "l":
-            let list2 ="";
-            for(let i=0;i<list.length;i++){
-                list2 = list2 + `${i}:${list[i]} /n`; 
-            }
-            channel.send("```"+list2+"```");
-            return;
-        default:
-    }
+    
 }
