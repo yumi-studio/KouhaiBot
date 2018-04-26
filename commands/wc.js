@@ -28,7 +28,7 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
             for(let i=0;i<list.length;i++){
                 list2 = list2 + `${i}:${list[i]} /n`; 
             }
-            channel.send(list2);
+            channel.send("```"+list2+"```");
             return;
         default:
     }
