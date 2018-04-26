@@ -19,7 +19,11 @@ client.on('guildMemberAdd',member=>{
 	})
 	if(channel===null) return;
 	rdc.get("welcome"+guild.id,(err,reply)=>{
-		if(reply===null) channel.send(`Have a great day, ${member} senpai`);
+		if(reply===null){
+			channel.send(`Have a great day, ${member} senpai`);
+			return;
+		}
+		let list = JSON.parse(reply.toString());
 	});
 });
 
