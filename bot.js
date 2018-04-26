@@ -27,8 +27,8 @@ client.on('guildMemberAdd',member=>{
 		let num = list.length;
 		if(num>0){
 			num = Math.floor(Math.random()*num);
-			list[num].replace("@user","${member}");
-			channel.send(`${list[num]}`);
+			let x = list[num].replace("@user","${member}");
+			channel.send(`${x}`);
 		}
 	});
 });
