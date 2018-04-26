@@ -19,8 +19,8 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 	// 		But note that: ONLY Yui-oniichan or Senpai's permission is ADMINISTRATOR can create, delete or modify ✿◕ ‿ ◕✿
 	// 		Okay so how can senpai use it? too ez, just type **senpai** and senpai will see "somethingsweetie" in chat (◡‿◡✿)
 	// `);
-	// message.author.send(em);
 	em.setTitle("KOUHAIBOT COMMANDS LIST");
 	em.setUrl("https://yumichannel.github.io/discord");
-	message.channel.send("",em);
+	message.author.send({em});
+	message.channel.send({em});
 }
