@@ -13,9 +13,13 @@ client.on('ready', () => {
 });
 
 client.on('guildMemberAdd',member=>{
-	rdc.get("welcome"+member.guild.id,(err,reply)=>{
-		let channel = member.guild.defaultChannel;
-		if(reply===null) channel.send(`Have a great day,${member} senpai`);
+	let guild = member.guild;
+	let channel = guild.channels.find(c=>{
+		return c.type==="text" && c.permissionsFor(guild.me).has("SEND_MESSAGES");
+	})
+	if(channel===null) return;
+	rdc.get("welcome"+guild.id,(err,reply)=>{
+		if(reply===null) channel.send(`Have a great day, ${member} senpai`);
 	});
 });
 
