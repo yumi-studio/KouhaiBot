@@ -7,8 +7,10 @@ exports.run = (Discord,rdc,client,message,args) =>{
 		return;
 	}
 	let text = `suck ${mt}`;
-	var fs = require("fs")
-    var Canvas = require('../node_modules/canvas')
+	var fs = require("fs");
+	console.log(fs);
+	var Canvas = require('../node_modules/canvas');
+	console.log(Canvas);
 	var img = new Canvas.Image;
 	img.src = fs.readFileSync("../src/hamlon.png");
 
