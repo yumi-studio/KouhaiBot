@@ -1,5 +1,6 @@
 exports.run = (Discord,rdc,client,message,args) =>{
 	let mt = message.mentions.members.first().displayName;
+	message.channel.send(mt);
 	if(mt === null){
 		message.channel.send("Error")
 		console.log(mt);
