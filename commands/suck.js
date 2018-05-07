@@ -1,6 +1,10 @@
 exports.run = (Discord,rdc,client,message,args) =>{
 	let mt = message.mentions.members.first().displayName;
-	if(mt === null) return;
+	if(mt === null){
+		message.channel.send("Error")
+		console.log(mt);
+		return;
+	}
 	let text = `suck ${mt}`;
 	var fs = require("fs")
     var Canvas = require('..node_modules/canvas')
