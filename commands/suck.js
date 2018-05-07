@@ -10,9 +10,12 @@ exports.run = (Discord,rdc,client,message,args) =>{
 	var fs = require("fs");
 	var Canvas = require('../node_modules/canvas');
 	var img = new Canvas.Image;
-	img.src = fs.readFileSync("../src/hamlon.png");
-
-	console.log(img);
+	try{
+		img.src = fs.readFileSync("../src/hamlon.png");
+		console.log("loaded image")
+	}catch(err){
+		console.log(err);
+	}
 
 	const canvas = Canvas.createCanvas(img.width,img.height);
 	const ctx = canvas.getContext('2d');
