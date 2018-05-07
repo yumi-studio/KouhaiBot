@@ -8,11 +8,11 @@ exports.run = (Discord,rdc,client,message,args) =>{
 	}
 	let text = `suck ${mt}`;
 	var fs = require("fs");
-	console.log(fs);
 	var Canvas = require('../node_modules/canvas');
-	console.log(Canvas);
 	var img = new Canvas.Image;
 	img.src = fs.readFileSync("../src/hamlon.png");
+
+	console.log(img);
 
 	const canvas = Canvas.createCanvas(img.width,img.height);
 	const ctx = canvas.getContext('2d');
