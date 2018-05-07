@@ -1,19 +1,21 @@
 exports.run = (Discord,rdc,client,message,args) =>{
-    let text = `suck ${args}`;
-    try {
-		let png = drawing(require('pngjs').PNG);
-		http.get("http://i.imgur.com/ZZn9DUa.png", m => {
-			m.pipe(new png({ filterType: 4 }))
-			.on('parsed', function() {
-				this.drawPixel(150,200, this.colors.black());
-				this.drawText(20,20,text, this.colors.new(0,0,0));
-				this.pack().pipe(fs.createWriteStream('test.png'));
-				let file = new Discord.Attachment("test.png","test.png");
-				em.attachFile(file);
-				message.channel.send(em);
-			});
-		});
-	} catch (error) {
-		console.log(error);
-	}
+	let mt = message.mentions.members.first().displayName;
+	if(mt === null) return;
+	let text = `suck ${mt}`;
+	var fs = require("fs")
+    var Canvas = require('..node_modules/canvas')
+	var img = new Canvas.Image;
+	img.src = fs.readFileSync("../src/hamlon.png");
+
+	const canvas = Canvas.createCanvas(img.width,img.height);
+	const ctx = canvas.getContext('2d');
+	ctx.drawImage(img, 0, 0, img.width, img.height);
+
+	ctx.font = '30px arial';
+	var len = ctx.measureText(text).width;
+	ctx.fillText(text, (img.width-len)/2 , 300);
+	
+	canvas.createPNGStream().pipe(
+		fs.createWriteStream('../src/hl.png').on("close",()=>{message.channel.send(new Discord.Attachment("../src/hl.png"))})
+	)
 }
