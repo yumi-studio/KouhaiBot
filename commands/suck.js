@@ -11,7 +11,7 @@ exports.run = (Discord,rdc,client,message,args) =>{
 	var Canvas = require('../node_modules/canvas');
 	var img = new Canvas.Image;
 	try{
-		img.src = fs.readFileSync("../hamlon.png");
+		img.src = fs.readFileSync("https://i.imgur.com/ZZn9DUa.png");
 		console.log("loaded image")
 	}catch(err){
 		console.log(err);
