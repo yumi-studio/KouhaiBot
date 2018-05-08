@@ -1,6 +1,5 @@
 exports.run = (Discord,rdc,client,message,args) =>{
 	let mt = message.mentions.members.first().displayName;
-	message.channel.send(mt);
 	if(mt === null){
 		message.channel.send("Error")
 		console.log(mt);
@@ -12,7 +11,6 @@ exports.run = (Discord,rdc,client,message,args) =>{
 	var img = new Canvas.Image;
 	try{
 		img.src = fs.readFileSync("src/hamlon.png");
-		console.log("loaded image")
 	}catch(err){
 		console.log(err);
 	}
