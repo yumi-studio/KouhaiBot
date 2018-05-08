@@ -1,11 +1,11 @@
 exports.run = (Discord,rdc,client,message,args) =>{
 	let mt = message.mentions.members.first().displayName;
 	if(mt === null){
-		message.channel.send("Error")
+		message.channel.send(">_< you must tag someone, senpai!")
 		console.log(mt);
 		return;
 	}
-	let text = `suck ${mt}`;
+	let text = `${mt} suck`;
 	var fs = require("fs");
 	var Canvas = require('../node_modules/canvas');
 	var img = new Canvas.Image;
@@ -20,8 +20,9 @@ exports.run = (Discord,rdc,client,message,args) =>{
 	ctx.drawImage(img, 0, 0, img.width, img.height);
 
 	ctx.font = '30px arial';
-	var len = ctx.measureText(text).width;
-	ctx.fillText(text, (img.width-len)/2 , 300);
+	ctx.fillStyle = 'rgba(255,255,255,1)'
+	let len = ctx.measureText(text).width;
+	ctx.fillText(text, (img.width-len)/2 , 225);
 	
 	canvas.createPNGStream().pipe(
 		fs.createWriteStream('src/hl.png').on("close",()=>{message.channel.send(new Discord.Attachment("src/hl.png"))})

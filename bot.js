@@ -13,6 +13,7 @@ client.on('ready', () => {
 });
 
 client.on('guildMemberAdd',member=>{
+	if(member.bot) return;
 	let guild = member.guild;
 	let channel = guild.channels.find(c=>{
 		return c.type==="text" && c.permissionsFor(guild.me).has("SEND_MESSAGES");
