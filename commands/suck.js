@@ -26,6 +26,6 @@ exports.run = (Discord,rdc,client,message,args) =>{
 	ctx.fillText(text, (img.width-len)/2 , 300);
 	
 	canvas.createPNGStream().pipe(
-		fs.createWriteStream('../src/hl.png').on("close",()=>{message.channel.send(new Discord.Attachment("../src/hl.png"))})
+		fs.createWriteStream('src/hl.png').on("close",()=>{message.channel.send(new Discord.Attachment("src/hl.png"))})
 	)
 }
