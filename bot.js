@@ -63,4 +63,26 @@ client.on('message', message => {
 	}	
 });
 
+client.on('message', message=>{
+	if(message.content.substring(0,5)=== prefix+'chửi'){
+		let chui = message.content.substring(6);
+		if(chui===null) return;
+		let Canvas = require('canvas');
+		let img = new Canvas.Image;
+		img.src = fs.readFileSync('src/hamlon.png');
+		let canvas = Canvas.createCanvas(img.width,img.height);
+		let ctx = canvas.getContext('2d');
+		ctx.drawImage(img, 0, 0, img.width, img.height);
+
+		ctx.font = '30px arial';
+		ctx.fillStyle = 'rgba(255,255,255,1)'
+		let len = ctx.measureText(chui).width;
+		ctx.fillText(chui, (img.width-len)/2 , 225);
+		
+		canvas.createPNGStream().pipe(
+			fs.createWriteStream('src/hl.png').on("close",()=>{message.channel.send(new Discord.Attachment("src/hl.png"))})
+		)
+	}
+});
+
 client.login(process.env.BOT_TOKEN);

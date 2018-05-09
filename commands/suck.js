@@ -6,17 +6,17 @@ exports.run = (Discord,rdc,client,message,args) =>{
 		return;
 	}
 	let text = `${mt} suck`;
-	var fs = require("fs");
-	var Canvas = require('../node_modules/canvas');
-	var img = new Canvas.Image;
+	let fs = require("fs");
+	let Canvas = require('../node_modules/canvas');
+	let img = new Canvas.Image;
 	try{
 		img.src = fs.readFileSync("src/hamlon.png");
 	}catch(err){
 		console.log(err);
 	}
 
-	const canvas = Canvas.createCanvas(img.width,img.height);
-	const ctx = canvas.getContext('2d');
+	let canvas = Canvas.createCanvas(img.width,img.height);
+	let ctx = canvas.getContext('2d');
 	ctx.drawImage(img, 0, 0, img.width, img.height);
 
 	ctx.font = '30px arial';
