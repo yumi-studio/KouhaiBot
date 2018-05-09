@@ -97,12 +97,9 @@ client.on('message', message=>{
 				const dispatcher = connection.playStream(
 					yt(yturl,{
 						filter: 'audioonly',
-						resolution: '360p',
+						resolution: '720p',
 						quality: 'highestaudio'
-					}),
-					{
-						bitrate: 'auto'
-					}
+					})
 				);
 				dispatcher.on('end',()=>{message.member.voiceChannel.leave()});
 			})
