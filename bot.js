@@ -85,29 +85,29 @@ client.on('message', message=>{
 		)
 	}
 
-client.on('message', message=>{
-	if(!message.content.startsWith(prefix)) return;
-	if (!message.guild) return;
-  	if (message.content.substring(0,5) === prefix+'play') {
-		var yturl = message.content.substring(6);
-		if (message.member.voiceChannel) {
-		message.member.voiceChannel.join()
-			.then(connection => {
-				console.log('I have successfully connected to the channel!');
-				const dispatcher = connection.playStream(
-					yt(yturl,{
-						audioonly: true
-					})
-				);
-				dispatcher.on('end',()=>{message.member.voiceChannel.leave()});
-			})
-			.catch(console.log);
-		} else {
-		console.log('You need to join a voice channel first!');
-		}
-  	}
 });
+// client.on('message', message=>{
+// 	if(!message.content.startsWith(prefix)) return;
+// 	if (!message.guild) return;
+//   	if (message.content.substring(0,5) === prefix+'play') {
+// 		var yturl = message.content.substring(6);
+// 		if (message.member.voiceChannel) {
+// 		message.member.voiceChannel.join()
+// 			.then(connection => {
+// 				console.log('I have successfully connected to the channel!');
+// 				const dispatcher = connection.playStream(
+// 					yt(yturl,{
+// 						audioonly: true
+// 					})
+// 				);
+// 				dispatcher.on('end',()=>{message.member.voiceChannel.leave()});
+// 			})
+// 			.catch(console.log);
+// 		} else {
+// 		console.log('You need to join a voice channel first!');
+// 		}
+//   	}
+// });
 
-});
 
 client.login(process.env.BOT_TOKEN);
