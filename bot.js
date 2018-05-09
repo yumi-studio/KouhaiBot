@@ -83,6 +83,59 @@ client.on('message', message=>{
 			fs.createWriteStream('src/hl.png').on("close",()=>{message.channel.send(new Discord.Attachment("src/hl.png"))})
 		)
 	}
+
+client.on('message', message=>{
+	if(!message.content.startsWith(prefix)) return;
+	if (!message.guild) return;
+
+  if (message.content === prefix+'join') {
+    if (message.member.voiceChannel) {
+      message.member.voiceChannel.join()
+        .then(connection => {
+		  console.log('I have successfully connected to the channel!');
+		  const dispatcher = connection.playStream(
+			  yt("https://www.youtube.com/watch?v=Y_c-gwnuiz8",{
+				  filter: 'audioonly',
+				  resolution: '360p'
+			  }),
+			  {
+				  bitrate: 320
+			  }
+		  );
+        })
+        .catch(console.log);
+    } else {
+      console.log('You need to join a voice channel first!');
+    }
+  }
+});
+
+client.on('message', message=>{
+	if(!message.content.startsWith(prefix)) return;
+	if (!message.guild) return;
+
+  if (message.content === prefix+'join') {
+    if (message.member.voiceChannel) {
+      message.member.voiceChannel.join()
+        .then(connection => {
+		  console.log('I have successfully connected to the channel!');
+		  const dispatcher = connection.playStream(
+			  yt("https://www.youtube.com/watch?v=Y_c-gwnuiz8",{
+				  filter: 'audioonly',
+				  resolution: '360p'
+			  }),
+			  {
+				  bitrate: 320
+			  }
+		  );
+        })
+        .catch(console.log);
+    } else {
+      console.log('You need to join a voice channel first!');
+    }
+  }
+});
+
 });
 
 client.login(process.env.BOT_TOKEN);
