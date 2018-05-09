@@ -3,6 +3,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require('fs');
+const yt = require('ytdl-core');
 var rdc = require('redis').createClient(process.env.REDIS_URL);
 
 const prefix = '!';
