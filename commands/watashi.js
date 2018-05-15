@@ -3,7 +3,7 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 	em.setColor(Math.floor(Math.random()*16777216));
 	em.setTitle('**'+message.member.displayName+'**');
 	em.addField('**Realname** ',message.author.username,true);
-	em.addField('**Join discord**',message.author.createdAt.getDate()+"/"+message.author.createdAt.getMonth()+"/"+message.author.createdAt.getFullYear(),true);
+	em.addField('**Join discord**',message.author.createdAt.getDate()+"/"+(message.author.createdAt.getMonth()+1)+"/"+message.author.createdAt.getFullYear(),true);
 	em.addField(`**Join ${message.guild.name}**`,message.member.joinedAt.getDate()+"/"+(message.member.joinedAt.getMonth()+1)+"/"+message.member.joinedAt.getFullYear());
 	em.setThumbnail(message.author.avatarURL);
 	message.channel.send(em);
