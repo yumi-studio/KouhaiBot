@@ -53,7 +53,7 @@ client.on('message', message => {
 			let em = new Discord.RichEmbed();
 			if(found!==undefined){
 				if(found.content.startsWith("https://") || found.content.startsWith("http://")){
-					if(found.content.endsWith())
+					em.setImage(found.content);
 				}else{
 					em.setDescription(found.content);
 				}
