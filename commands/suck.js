@@ -5,19 +5,21 @@ exports.run = (Discord,rdc,client,message,args) =>{
 		console.log(mt);
 		return;
 	}
-	let text = `${mt} suck`;
-	let fs = require("fs");
-	let Canvas = require('../node_modules/canvas');
-	let img = new Canvas.Image;
+	let text = `${mt} suck`
+	let fs = require("fs")
+	let Canvas = require('../node_modules/canvas')
+	let img = new Canvas.Image
 	try{
-		img.src = fs.readFileSync("src/hamlon.png");
+		img.src = fs.readFileSync("src/hamlon.png")
+
 	}catch(err){
-		console.log(err);
+		console.log(err)
+		return
 	}
 
-	let canvas = Canvas.createCanvas(img.width,img.height);
-	let ctx = canvas.getContext('2d');
-	ctx.drawImage(img, 0, 0, img.width, img.height);
+	let canvas = Canvas.createCanvas(img.width,img.height)
+	let ctx = canvas.getContext('2d')
+	ctx.drawImage(img, 0, 0, img.width, img.height)
 
 	ctx.font = '30px arial';
 	ctx.fillStyle = 'rgba(255,255,255,1)'
