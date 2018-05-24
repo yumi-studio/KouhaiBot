@@ -15,11 +15,11 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 	ctx = canvas.getContext("2d")
 
 	ava.onload = function(){
-		ctx.fillStyle = "#7c83af"
+		ctx.fillStyle = "#313a75"
 		// ctx.globalAlpha=0.75
 		ctx.fillRect(0,0,500,200)
 		// ctx.globalAlpha=1
-		ctx.fillStyle = "#313A75"
+		ctx.fillStyle = "#525b92"
 		ctx.fillRect(195,25,280,30)
 		// ctx.fillRect(195,65,160,30)
 		// ctx.fillRect(195,105,160,30)
