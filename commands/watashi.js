@@ -1,5 +1,6 @@
 exports.run = (Discord,rdc,client,message,cmd) =>{
 	if(message.channel!=="TextChannel") return
+	let req = require('request')
 	let em = new Discord.RichEmbed()
 	let name = message.author.username
 	let dcjoin = `Join discord:${message.member.joinedAt.getDate()}/${message.member.joinedAt.getMonth()+1}/${message.member.joinedAt.getFullYear()}`
@@ -12,7 +13,9 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 	ctx = canvas.getContext("2d")
 	try {
 		img.src = fs.readFileSync("src/info.png")
-		ava.src = message.author.avatarURL
+		fs.readFile(message.author.avatarURL,(err,src)=>{
+			ava.src=src;
+		})
 	} catch (error) {
 		console.log(error)
 		return
