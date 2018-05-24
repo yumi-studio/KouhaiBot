@@ -1,5 +1,8 @@
 exports.run = (Discord,rdc,client,message,cmd) =>{
-	if(message.channel!=="TextChannel") return
+	if(message.channel!=="TextChannel"){
+		message.channel.send("Error1")
+		return
+	}
 	let req = require('request')
 	let em = new Discord.RichEmbed()
 	let name = message.author.username
