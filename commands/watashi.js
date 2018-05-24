@@ -12,7 +12,7 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 	canvas = Canvas.creatCanvas(500,200),
 	ctx = canvas.getContext("2d")
 	try {
-		img.src = fs.readFileSync("src/info.png")
+		// img.src = fs.readFileSync("src/info.png")
 		req.get(message.author.avatarURL.split("?")[0],{encoding:null},(err,res)=>{
 			ava.src = res.body
 		})
@@ -21,13 +21,13 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 		return
 	}
 	ava.onload = ()=>{
+		console.log(ava)
 		ctx.drawImage(ava,25,25,150,150)
 		ctx.font = "30px Arial"
 		ctx.fillStyle = "rgba(255,255,255,1)"
 		ctx.fillText(name,300,25,200)
 		ctx.fillText(dcjoin,300,50)
 		ctx.fillText(svjoin,300,75)
-	
 		canvas.createPNGStream().pipe(
 			fs.createWriteStream('src/info.png').on("close",()=>{message.channel.send(new Discord.Attachment("src/info.png"))})
 		)
