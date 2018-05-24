@@ -41,7 +41,7 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 	}
 
 	try {
-		rq.get(client.user.avatarURL.replace('=2048','=256'),{encoding:null},(err,res)=> {
+		req.get(client.user.avatarURL.replace('=2048','=256'),{encoding:null},(err,res)=> {
 			ava.src = res.body
 		})
 	} catch (error) {
