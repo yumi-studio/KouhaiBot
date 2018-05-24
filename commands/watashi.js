@@ -5,11 +5,11 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 	let name = message.author.username
 	let dcjoin = `Join discord:${message.member.joinedAt.getDate()}/${message.member.joinedAt.getMonth()+1}/${message.member.joinedAt.getFullYear()}`
 	let svjoin = `Join server:${message.author.createdAt.getDate()}/${message.author.createdAt.getMonth()+1}/${message.author.createdAt.getFullYear()}`
-	let fs = require("fs"),
-	Canvas = require("../node_modules/canvas"),
+	let fs = require("fs")
+	let Canvas = require("../node_modules/canvas"),
 	img = new Canvas.Image,
 	ava = new Canvas.Image,
-	canvas = Canvas.creatCanvas(500,200),
+	canvas = Canvas.createCanvas(500,200),
 	ctx = canvas.getContext("2d")
 	try {
 		// img.src = fs.readFileSync("src/info.png")
