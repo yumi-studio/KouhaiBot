@@ -1,7 +1,5 @@
 exports.run = (Discord,rdc,client,message,cmd) =>{
-	message.channel.send("Start")
-	if(message.channel.type!=="TextChannel"){
-		message.channel.send("Error1")
+	if(message.channel.type!=="text"){
 		return
 	}
 	let req = require('request')
@@ -15,8 +13,6 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 	ava = new Canvas.Image,
 	canvas = Canvas.createCanvas(500,200),
 	ctx = canvas.getContext("2d")
-
-	console.log("Khai báo thành công")
 
 	ava.onload = function(){
 		console.log(ava)
@@ -32,19 +28,14 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 		)
 	}
 
-	console.log("Bắt đầu try catch")
-
 	try {
 		// img.src = fs.readFileSync("src/info.png")
 		req.get(message.author.avatarURL.split("?")[0],{encoding:null},(err,res)=>{
 			ava.src = res.body
 		})
 	} catch (error) {
-		console.log("Lỗi try catch")
 		console.log(error)
 		return
 	}
-
-	console.log("Kết thúc try catch")
 
 }
