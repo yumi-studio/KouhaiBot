@@ -5,8 +5,8 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 	let req = require('request')
 	let em = new Discord.RichEmbed()
 	let name = message.author.username
-	let sv = ['Join server',message.member.joinedAt.getDate(),message.member.joinedAt.getMonth()+1,message.member.joinedAt.getFullYear().replace('20','')]
-	let dc = ['Join discord',message.author.createdAt.getDate(),message.author.createdAt.getMonth()+1,message.author.createdAt.getFullYear().replace('20','')]
+	let sv = ['Join server',message.member.joinedAt.getDate(),message.member.joinedAt.getMonth()+1,message.member.joinedAt.getFullYear()-2000]
+	let dc = ['Join discord',message.author.createdAt.getDate(),message.author.createdAt.getMonth()+1,message.author.createdAt.getFullYear()-2000]
 	let fs = require("fs")
 	let Canvas = require("../node_modules/canvas"),
 	img = new Canvas.Image,
