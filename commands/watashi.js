@@ -1,6 +1,6 @@
 exports.run = (Discord,rdc,client,message,cmd) =>{
 	message.channel.send("Start")
-	if(message.channel!=="TextChannel"){
+	if(message.channel.type!=="TextChannel"){
 		message.channel.send("Error1")
 		return
 	}
