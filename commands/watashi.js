@@ -26,7 +26,7 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 		if(ctx.measureText(name).width>200){
 			ctx.fillText(name.slice(0,9)+"...",270,47)
 		}else{
-			ctx.fillText(name,270,47)
+			ctx.fillText(name,265+(210-ctx.measureText(name).width)/2,47)
 		}
 		let dt = client.user.createdAt.toDateString().split(" ");
 		switch(dt[2]){
