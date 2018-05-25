@@ -28,7 +28,7 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 		}else{
 			ctx.fillText(name,265+(210-ctx.measureText(name).width)/2,47)
 		}
-		let dt = client.user.createdAt.toDateString().split(" ");
+		let dt = message.member.joinedAt.toDateString().split(" ");
 		switch(dt[2]){
 			case '01':	dt[2]='1st'; break;
 			case '02':	dt[2]='2nd'; break;
