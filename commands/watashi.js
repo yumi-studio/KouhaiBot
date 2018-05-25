@@ -35,7 +35,7 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 			case '03':	dt[2]='3rd'; break;
 			default:	dt[2]=parseInt(dt[2])+"th"; break;
 		}
-		let dtt = `${dt[1]},${dt[1]} ${dt[3]}`
+		let dtt = `${dt[1]},${dt[2]} ${dt[3]}`
 		ctx.fillText(dtt,265+(210-ctx.measureText(dtt).width)/2,87)
 
 		let x = message.member.highestRole.name;
