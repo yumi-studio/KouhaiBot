@@ -36,17 +36,18 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 			default:	dt[2]=parseInt(dt[2])+"th"; break;
 		}
 		let dtt = `${dt[1]},${dt[1]} ${dt[3]}`
-		ctx.fillText(dtt,265+(210-ctx.measureText(dtt))/2,82)
+		ctx.fillText(dtt,265+(210-ctx.measureText(dtt).width)/2,87)
 
 		let x = message.member.highestRole.name;
 		ctx.fillStyle = message.member.highestRole.hexColor;
 		if(ctx.measureText(x).width>200){
-			ctx.fillText(x.slice(0,9)+"...",270,122)
+			ctx.fillText(x.slice(0,9)+"...",270,127)
 		}else{
-			ctx.fillText(x,270,122)
+			ctx.fillText(x,265+(210-ctx.measureText(x).width)/2,127)
 		}
 
-		ctx.fillText(message.author.id,270,162)
+		ctx.fillStyle = "#FFFFFF"
+		ctx.fillText(message.author.id,265+(210-ctx.measureText(message.author.id).width)/2,167)
 
 		canvas.createPNGStream().pipe(
 			fs.createWriteStream('src/info.png').on("close",()=>{message.channel.send(new Discord.Attachment("src/info.png"))})
