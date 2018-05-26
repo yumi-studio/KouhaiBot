@@ -1,14 +1,16 @@
-exports.run = (Discord,rdc,client,message,cmd) =>{
+const Discord = require('discord.js')
+const Canvas = require('canvas')
+const req = require('request')
+const fs = require('fs')
+
+
+exports.run = (client,message,cmd) =>{
 	if(message.channel.type!=="text"){
 		return
 	}
-	let req = require('request')
 	let em = new Discord.RichEmbed()
 	let name = message.author.username
 	let sv = [message.member.joinedAt.getDate(),message.member.joinedAt.getMonth()+1,message.member.joinedAt.getFullYear()-2000]
-	// let dc = ['Join discord',message.author.createdAt.getDate(),message.author.createdAt.getMonth()+1,message.author.createdAt.getFullYear()-2000]
-	let fs = require("fs")
-	let Canvas = require("../node_modules/canvas"),
 	img = new Canvas.Image,
 	ava = new Canvas.Image,
 	canvas = Canvas.createCanvas(500,200),

@@ -1,7 +1,8 @@
 let fs = require("fs")
 let Canvas = require('canvas')
+let Discord = require('discord.js')
 
-exports.run = (Discord,rdc,client,message,args) =>{
+exports.run = (client,message,args) =>{
 	let mt = message.mentions.members.first().displayName;
 	if(mt === null){
 		message.channel.send(">_< you must tag someone, senpai!")
