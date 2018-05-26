@@ -1,4 +1,4 @@
-exports.run = (Discord,rdc,client,message,cmd) =>{
+exports.run = (client,message,cmd) =>{
 	let list = cmd.split("-");
 	let num = list.length;
 	if(num>0){

@@ -1,6 +1,6 @@
-let fs = require("fs")
-let Canvas = require('canvas')
-let Discord = require('discord.js')
+const fs = require("fs")
+const Canvas = require('canvas')
+const Discord = require('discord.js')
 
 exports.run = (client,message,args) =>{
 	let mt = message.mentions.members.first().displayName;

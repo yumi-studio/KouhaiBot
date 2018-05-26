@@ -1,3 +1,5 @@
-exports.run = (Discord,rdc,client,message,cmd) =>{
+const Discord = require('discord.js');
+
+exports.run = (client,message,cmd) =>{
 	
 }

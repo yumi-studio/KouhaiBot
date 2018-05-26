@@ -1,4 +1,7 @@
-exports.run = (Discord,rdc,client,message,cmd) =>{
+const Discord = require('discord.js');
+const rdc = require('redis').createClient(process.env.REDIS_URL);
+
+exports.run = (client,message,cmd) =>{
 	let list =[];
 	let arg1 = cmd.split(" ")[0];
 	let arg2 = cmd.substring(arg1.length+1);
@@ -41,10 +44,10 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 			let found = list.findIndex(m=>m.name===newc.name);
 			if(found===-1){
 				list.push(newc);
-				channel.send("**"+arg1+"** is added.");
+				channel.send("`"+arg1+"` is added.");
 			}else{
 				list.splice(found,1,newc);
-				channel.send("**"+arg1+"** is modified.");
+				channel.send("`"+arg1+"` is modified.");
 			}
 			rdc.set("cmd"+guild.id,JSON.stringify(list),()=>{});
 		});
@@ -59,7 +62,7 @@ exports.run = (Discord,rdc,client,message,cmd) =>{
 			if(found===-1) return;
 			list.splice(found,1);
 			rdc.set("cmd"+guild.id,JSON.stringify(list),()=>{
-				channel.send("**"+arg1+"** is deleted.");
+				channel.send("`"+arg1+"` is deleted.");
 			});
 		});
 	}

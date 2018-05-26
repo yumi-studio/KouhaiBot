@@ -1,4 +1,7 @@
-exports.run = (Discord,rdc,client,message,cmd) =>{
+const Discord = require('discord.js');
+const rdc = require('redis').createClient(process.env.REDIS_URL);
+
+exports.run = (client,message,cmd) =>{
     if(cmd.lenght<=0) return;
     let opt = cmd.split(" ")[0];
     let wcmsg = cmd.substring(2);
