@@ -1,8 +1,11 @@
-exports.run = (Discord,rdc,client,message,cmd) =>{
+const Discord = require('discord.js'),
+em = new Discord.RichEmbed();
+
+exports.run = (client,message,cmd) =>{
     let mt = message.mentions.members.first();
-    if(mt===null){
-        message.channel.send(new Discord.RichEmbed().setImage(message.author.avatarURL))
+    if(cmd === null || undefined){
+        message.channel.send(em.setImage(message.author.avatarURL))
         return
     }
-    message.channel.send(new Discord.RichEmbed().setImage(mt.user.avatarURL));
+    message.channel.send(em.setImage(mt.user.avatarURL));
 }
