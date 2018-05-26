@@ -1,3 +1,6 @@
+let fs = require("fs")
+let Canvas = require('canvas')
+
 exports.run = (Discord,rdc,client,message,args) =>{
 	let mt = message.mentions.members.first().displayName;
 	if(mt === null){
@@ -6,8 +9,6 @@ exports.run = (Discord,rdc,client,message,args) =>{
 		return;
 	}
 	let text = `${mt} suck`
-	let fs = require("fs")
-	let Canvas = require('../node_modules/canvas')
 	let img = new Canvas.Image
 	try{
 		img.src = fs.readFileSync("src/hamlon.png")
