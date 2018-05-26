@@ -3,3 +3,4 @@ bottest.js
 New Text Document.bat
 *.tlog
 commands/save.js
+commands/weather.js
