@@ -3,7 +3,7 @@ em = new Discord.RichEmbed();
 
 exports.run = (client,message,cmd) =>{
     let mt = message.mentions.members.first();
-    if(cmd === null || undefined){
+    if(cmd === ''){
         message.channel.send(em.setImage(message.author.avatarURL))
         return
     }
