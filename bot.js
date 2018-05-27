@@ -100,7 +100,8 @@ client.on('message', message=>{
 				console.log('I have successfully connected to the channel!');
 				const dispatcher = connection.playStream(
 					yt(yturl,{
-						audioonly: true
+						filter: 'audioonly',
+						quality: highestaudio
 					})
 				);
 				dispatcher.on('end',()=>{message.member.voiceChannel.leave()});
