@@ -101,7 +101,7 @@ client.on('message', message=>{
 				const dispatcher = connection.playStream(
 					yt(yturl,{
 						filter: 'audioonly',
-						quality: highestaudio
+						quality: 'highestaudio'
 					})
 				);
 				dispatcher.on('end',()=>{message.member.voiceChannel.leave()});
@@ -110,6 +110,9 @@ client.on('message', message=>{
 		} else {
 		console.log('You need to join a voice channel first!');
 		}
+	  }
+	if (message.content.substring(0,5) === prefix+'end') {
+		message.member.voiceChannel.leave()
   	}
 });
 
