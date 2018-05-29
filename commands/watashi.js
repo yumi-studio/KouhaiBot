@@ -52,7 +52,7 @@ exports.run = (client,message,cmd) =>{
 		ctx.fillText(message.author.id,265+(210-ctx.measureText(message.author.id).width)/2,167)
 
 		canvas.createPNGStream().pipe(
-			fs.createWriteStream('src/info.png').on("close",()=>{message.channel.send(new Discord.Attachment("src/info.png"))})
+			message.channel.send(new Discord.Attachment(canvas.toBuffer()))
 		)
 	}
 
