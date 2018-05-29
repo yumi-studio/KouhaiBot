@@ -51,9 +51,7 @@ exports.run = (client,message,cmd) =>{
 		ctx.fillStyle = "#FFFFFF"
 		ctx.fillText(message.author.id,265+(210-ctx.measureText(message.author.id).width)/2,167)
 
-		canvas.createPNGStream().pipe(
-			message.channel.send(new Discord.Attachment(canvas.toBuffer()))
-		)
+		message.channel.send(new Discord.Attachment(canvas.toBuffer()))
 	}
 
 	try {
