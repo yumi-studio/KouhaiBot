@@ -119,7 +119,7 @@ client.on('message', message=>{
 
 client.on('message',message=>{
 	let mt = message.mentions.members;
-	if(mt===null || message.author.bot) return;
+	if(mt===undefined || message.author.bot) return;
 	rdc.get("busy",(err,res)=>{
 		if(res===null) return
 		list = JSON.parse(res.toString())
