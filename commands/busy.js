@@ -24,6 +24,9 @@ exports.run = (client,message,args) => {
         case 'off':
             turnoff(message.author.id)
             break;
+        case 'list':
+            message.channel.send(`${JSON.stringify(list)}`)
+            break;
         default:
             setContent(message.author.id,args);
             break;
