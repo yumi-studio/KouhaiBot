@@ -116,5 +116,18 @@ client.on('message', message=>{
   	}
 });
 
+client.on('message',message=>{
+	let mt = message.mentions.members;
+	if(mt===null||undefined || message.author.bot) return;
+	rdc.get("busy",(err,res)=>{
+		list = JSON.parse(res.toString())
+		mt.forEach(a => {
+			let found = list.find(m=>m.id===a.user.id)
+			if(found!==undefined && found.status==='on'){
+				message.channel.send(found.content);
+			}
+		});
+	})
+})
 
 client.login(process.env.BOT_TOKEN);

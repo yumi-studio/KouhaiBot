@@ -1,0 +1,55 @@
+const Discord = require('discord.js')
+const rdc = require('redis').createClient(process.env.REDIS_URL);
+var list;
+rdc.get('busy',(err,res)=>{
+    if(res===undefined||null){
+        list = []
+    }else{
+        list = JSON.parse(res.toString())
+    }
+})
+
+function turnon(id){
+    let fi = list.findIndex(m=> m.id===id)
+    if(fi!==-1){
+        list[fi].status === 'on'
+        if(list[fi].content===''){
+            list[fi].content=`<@${list[fi].id}}> is busy.`
+        }
+    }
+}
+
+function turnoff(id){
+    let fi = list.findIndex(m=> m.id===id)
+    if(fi!==-1){
+        list[fi].status === 'off'
+        rdc.set("busy",JSON.stringify(list),()=>{})
+    }
+}
+
+function setContent(id,ct){
+    let fi = list.findIndex(m=> m.id===id)
+    if(fi!==-1){
+        list[fi].content === ct
+        rdc.set("busy",JSON.stringify(list),()=>{
+            message.channel.send('busy message is edited.')
+        })
+    }
+}
+
+exports.run = (client,message,args) => {
+    switch(args){
+        case 'on':
+            if(message.author.presence.status==='dnd'||'idle'){
+                turnon(message.author.id);
+                rdc.set("busy",JSON.stringify(list),()=>{})
+            }else{
+                message.channel.send('you must be in `Do not disturb` or `Idle`')
+            }
+            return;
+        case 'off':
+            turnoff(message.author.id)
+        default:
+            setContent(message.author.id,args);
+    }
+}
