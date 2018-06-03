@@ -14,9 +14,6 @@ exports.run = (client,message,args) => {
         case 'on':
             if(message.author.presence.status==='dnd'|| message.author.presence.status==='idle'){
                 turnon(message.author.id);
-                rdc.set("busy",JSON.stringify(list),()=>{
-                    message.channel.send(`${message.author} busy mode on`)
-                })
             }else{
                 message.channel.send('you must be in `Do not disturb` or `Idle`')
             }
@@ -40,6 +37,9 @@ function turnon(id){
         if(list[fi].content===''){
             list[fi].content=`<@${list[fi].id}}> is busy.`
         }
+        rdc.set("busy",JSON.stringify(list),()=>{
+            message.channel.send(`${message.author} busy mode on`)
+        })
     }
 }
 
@@ -60,10 +60,11 @@ function setContent(id,ct){
         })
     }else{
         let newb = {
-            id: message.author.id,
-            status: 'on',
+            id: id,
+            status: 'off',
             content: ct
         }
+        message.channel.send(JSON.stringify(newb))
         list.push(newb)
         rdc.set("busy",JSON.stringify(list),()=>{
             message.channel.send('your message is added, use `!busy on` to active')
