@@ -13,7 +13,7 @@ exports.run = (client,message,args) => {
     switch(args){
         case 'on':
             if(message.author.presence.status==='dnd'|| message.author.presence.status==='idle'){
-                turnon(message.author.id);
+                turnon(message.author.id)
             }else{
                 message.channel.send('you must be in `Do not disturb` or `Idle`')
             }
@@ -28,47 +28,48 @@ exports.run = (client,message,args) => {
             setContent(message.author.id,args);
             break;
     }
-}
 
-function turnon(id){
-    let fi = list.findIndex(m=> m.id===id)
-    if(fi!==-1){
-        list[fi].status = 'on'
-        if(list[fi].content===''){
-            list[fi].content=`<@${list[fi].id}}> is busy.`
+    function turnon(id){
+        let fi = list.findIndex(m=> m.id===id)
+        if(fi!==-1){
+            list[fi].status = 'on'
+            if(list[fi].content===''){
+                list[fi].content=`<@${list[fi].id}}> is busy.`
+            }
+            rdc.set("busy",JSON.stringify(list),()=>{
+                message.channel.send(`${message.author} busy mode on`)
+            })
         }
-        rdc.set("busy",JSON.stringify(list),()=>{
-            message.channel.send(`${message.author} busy mode on`)
-        })
     }
-}
-
-function turnoff(id){
-    let fi = list.findIndex(m=> m.id===id)
-    if(fi!==-1){
-        list[fi].status = 'off'
-        rdc.set("busy",JSON.stringify(list),()=>{})
-    }
-}
-
-function setContent(id,ct){
-    let fi = list.findIndex(m=> m.id===id)
-    message.channel.send(fi);
-    if(fi!==-1){
-        list[fi].content = ct
-        rdc.set("busy",JSON.stringify(list),()=>{
-            message.channel.send('busy message is edited.')
-        })
-    }else{
-        let newb = {
-            id: id,
-            status: 'off',
-            content: ct
+    
+    function turnoff(id){
+        let fi = list.findIndex(m=> m.id===id)
+        if(fi!==-1){
+            list[fi].status = 'off'
+            rdc.set("busy",JSON.stringify(list),()=>{})
         }
-        message.channel.send(JSON.stringify(newb))
-        list.push(newb)
-        rdc.set("busy",JSON.stringify(list),()=>{
-            message.channel.send('your message is added, use `!busy on` to active')
-        })
+    }
+    
+    function setContent(id,ct){
+        let fi = list.findIndex(m=> m.id===id)
+        message.channel.send(fi);
+        if(fi!==-1){
+            list[fi].content = ct
+            rdc.set("busy",JSON.stringify(list),()=>{
+                message.channel.send('busy message is edited.')
+            })
+        }else{
+            let newb = {
+                id: id,
+                status: 'off',
+                content: ct
+            }
+            message.channel.send(JSON.stringify(newb))
+            list.push(newb)
+            rdc.set("busy",JSON.stringify(list),()=>{
+                message.channel.send('your message is added, use `!busy on` to active')
+            })
+        }
     }
 }
+
