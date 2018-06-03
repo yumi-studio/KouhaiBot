@@ -120,6 +120,7 @@ client.on('message',message=>{
 	let mt = message.mentions.members;
 	if(mt===null || mt===undefined || message.author.bot) return;
 	rdc.get("busy",(err,res)=>{
+		if(res===null) return
 		list = JSON.parse(res.toString())
 		mt.forEach(a => {
 			let found = list.find(m=>m.id===a.user.id)
