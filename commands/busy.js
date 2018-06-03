@@ -50,7 +50,7 @@ function setContent(id,ct){
 exports.run = (client,message,args) => {
     switch(args){
         case 'on':
-            if(message.author.presence.status==='dnd'||'idle'){
+            if(message.author.presence.status==='dnd'|| message.author.presence.status==='idle'){
                 turnon(message.author.id);
                 rdc.set("busy",JSON.stringify(list),()=>{})
             }else{
