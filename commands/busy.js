@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const rdc = require('redis').createClient(process.env.REDIS_URL);
 var list;
 rdc.get('busy',(err,res)=>{
-    if(res===undefined||null){
+    if(res===null){
         list = []
     }else{
         list = JSON.parse(res.toString())
@@ -33,6 +33,16 @@ function setContent(id,ct){
         list[fi].content === ct
         rdc.set("busy",JSON.stringify(list),()=>{
             message.channel.send('busy message is edited.')
+        })
+    }else{
+        let newb = {
+            id: message.author.id,
+            status: 'on',
+            content: ct
+        }
+        list.push(newb)
+        rdc.set("busy",JSON.stringify(list),()=>{
+            message.channel.send('your message is added, use `!busy on` to active')
         })
     }
 }
