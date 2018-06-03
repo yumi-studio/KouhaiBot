@@ -33,7 +33,7 @@ exports.run = (client,message,args) => {
 function turnon(id){
     let fi = list.findIndex(m=> m.id===id)
     if(fi!==-1){
-        list[fi].status === 'on'
+        list[fi].status = 'on'
         if(list[fi].content===''){
             list[fi].content=`<@${list[fi].id}}> is busy.`
         }
@@ -43,7 +43,7 @@ function turnon(id){
 function turnoff(id){
     let fi = list.findIndex(m=> m.id===id)
     if(fi!==-1){
-        list[fi].status === 'off'
+        list[fi].status = 'off'
         rdc.set("busy",JSON.stringify(list),()=>{})
     }
 }
@@ -51,7 +51,7 @@ function turnoff(id){
 function setContent(id,ct){
     let fi = list.findIndex(m=> m.id===id)
     if(fi!==-1){
-        list[fi].content === ct
+        list[fi].content = ct
         rdc.set("busy",JSON.stringify(list),()=>{
             message.channel.send('busy message is edited.')
         })
