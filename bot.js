@@ -89,6 +89,7 @@ client.on('message', message=>{
 	}
 
 });
+
 client.on('message', message=>{
 	if(!message.content.startsWith(prefix)) return;
 	if (!message.guild) return;
@@ -118,14 +119,14 @@ client.on('message', message=>{
 
 client.on('message',message=>{
 	let mt = message.mentions.members;
-	if(mt===null || mt===undefined || message.author.bot) return;
+	if(mt===null || message.author.bot) return;
 	rdc.get("busy",(err,res)=>{
 		if(res===null) return
 		list = JSON.parse(res.toString())
 		mt.forEach(a => {
-			let found = list.find(m=>m.id===a.user.id)
-			if(found!==undefined && found.status==='on'){
-				message.channel.send(found.content);
+			let found = list.findIndex(m=>m.id===a.user.id)
+			if(found!==-1 && list[found].status==='on'){
+				message.channel.send(list[found].content);
 			}
 		});
 	})

@@ -52,14 +52,18 @@ exports.run = (client,message,args) => {
         case 'on':
             if(message.author.presence.status==='dnd'|| message.author.presence.status==='idle'){
                 turnon(message.author.id);
-                rdc.set("busy",JSON.stringify(list),()=>{})
+                rdc.set("busy",JSON.stringify(list),()=>{
+                    message.channel.send(`${message.author} busy mode on`)
+                })
             }else{
                 message.channel.send('you must be in `Do not disturb` or `Idle`')
             }
             return;
         case 'off':
             turnoff(message.author.id)
+            break;
         default:
             setContent(message.author.id,args);
+            break;
     }
 }
