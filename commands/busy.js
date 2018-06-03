@@ -1,13 +1,6 @@
 const Discord = require('discord.js')
 const rdc = require('redis').createClient(process.env.REDIS_URL);
 var list;
-rdc.get('busy',(err,res)=>{
-    if(res===null){
-        list = []
-    }else{
-        list = JSON.parse(res.toString())
-    }
-})
 
 function turnon(id){
     let fi = list.findIndex(m=> m.id===id)
@@ -48,6 +41,13 @@ function setContent(id,ct){
 }
 
 exports.run = (client,message,args) => {
+    rdc.get('busy',(err,res)=>{
+        if(res===null){
+            list = []
+        }else{
+            list = JSON.parse(res.toString())
+        }
+    })
     switch(args){
         case 'on':
             if(message.author.presence.status==='dnd'|| message.author.presence.status==='idle'){
