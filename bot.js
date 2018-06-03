@@ -26,7 +26,7 @@ client.on('guildMemberAdd',member=>{
 	rdc.get("welcome"+guild.id,(err,reply)=>{
 		if(reply===null){
 			channel.send(`Have a great day, ${member} senpai`);
-			return;
+			return;	
 		}
 		let list = JSON.parse(reply.toString());
 		let num = list.length;
@@ -118,7 +118,7 @@ client.on('message', message=>{
 
 client.on('message',message=>{
 	let mt = message.mentions.members;
-	if(mt===null||undefined || message.author.bot) return;
+	if(mt===null || mt===undefined || message.author.bot) return;
 	rdc.get("busy",(err,res)=>{
 		list = JSON.parse(res.toString())
 		mt.forEach(a => {
