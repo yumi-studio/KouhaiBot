@@ -1,6 +1,6 @@
 const Discord = require('discord.js')
 const rdc = require('redis').createClient(process.env.REDIS_URL);
-var list;
+var list = [];
 
 exports.run = (client,message,args) => {
     rdc.get('busy',(err,res)=>{
@@ -32,6 +32,7 @@ exports.run = (client,message,args) => {
     function turnon(id){
         message.channel.send('tiến hành bật busy mode '+id)
         let fi = list.findIndex(m=> m.id===id)
+        console.log(fi)
         message.channel.send(fi)
         if(fi!==-1){
             list[fi].status = 'on'
