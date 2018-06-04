@@ -117,19 +117,19 @@ client.on('message', message=>{
   	}
 });
 
-client.on('message',message=>{
-	let mt = message.mentions.members;
-	if(mt===undefined || message.author.bot) return;
-	rdc.get("busy",(err,res)=>{
-		if(res===null) return
-		list = JSON.parse(res.toString())
-		mt.forEach(a => {
-			let found = list.findIndex(m=>m.id===a.user.id)
-			if(found!==-1 && list[found].status==='on'){
-				message.channel.send(list[found].content);
-			}
-		});
-	})
-})
+// client.on('message',message=>{
+// 	let mt = message.mentions.members;
+// 	if(mt===undefined || message.author.bot) return;
+// 	rdc.get("busy",(err,res)=>{
+// 		if(res===null) return
+// 		list = JSON.parse(res.toString())
+// 		mt.forEach(a => {
+// 			let found = list.findIndex(m=>m.id===a.user.id)
+// 			if(found!==-1 && list[found].status==='on'){
+// 				message.channel.send(list[found].content);
+// 			}
+// 		});
+// 	})
+// })
 
 client.login(process.env.BOT_TOKEN);
