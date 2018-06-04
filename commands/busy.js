@@ -54,7 +54,6 @@ exports.run = (client,message,args) => {
     
     function setContent(id,ct){
         let fi = list.findIndex(m=> m.id===id)
-        message.channel.send(fi);
         if(fi!==-1){
             list[fi].content = ct
             rdc.set("busy",JSON.stringify(list),()=>{
