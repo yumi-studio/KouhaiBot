@@ -30,7 +30,7 @@ exports.run = (client,message,args) => {
     }
 
     function turnon(id){
-        message.channel.send('tiến hành bật busy mode')
+        message.channel.send('tiến hành bật busy mode '+id)
         let fi = list.findIndex(m=> m.id===id)
         message.channel.send(fi)
         if(fi!==-1){
