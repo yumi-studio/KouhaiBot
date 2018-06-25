@@ -57,10 +57,10 @@ client.on('message', message => {
 			if(found!==undefined){
 				if(found.content.startsWith("https://") || found.content.startsWith("http://")){
 					em.setImage(found.content);
+					message.channel.send(em);
 				}else{
-					em.setDescription(found.content);
+					message.channel.send(found.content);
 				}
-				message.channel.send(em);
 				return;
 			}
 		});
@@ -87,7 +87,6 @@ client.on('message', message=>{
 			fs.createWriteStream('src/hl.png').on("close",()=>{message.channel.send(new Discord.Attachment("src/hl.png"))})
 		)
 	}
-
 });
 
 client.on('message', message=>{
