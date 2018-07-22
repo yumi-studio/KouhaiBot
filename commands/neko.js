@@ -10,6 +10,6 @@ exports.run=(client,message,cmd)=>{
 		let ans = strindex.find(m=>{
 			return m.indexOf('https://cdn.nekos.life/lewd')===0
 		})
-		message.channel.send(new Discord.RichEmbed().image(ans))
+		message.channel.send(new Discord.RichEmbed().setImage(ans))
 	})
 }
