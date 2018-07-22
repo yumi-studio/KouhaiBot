@@ -3,8 +3,8 @@ const rq = require('request')
 var src = 'https://nekos.life/'
 var lewd = false
 var tag = ""
-exports.run=(client,message,cmd)=>{
-	if(message.split(' ')[1]==='lewd'){
+exports.run=(client,message,args)=>{
+	if(args==='lewd'){
 		lewd=true
 		tag='lewd'
 	}
