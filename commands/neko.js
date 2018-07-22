@@ -4,7 +4,7 @@ var src = 'https://nekos.life/'
 var lewd = false
 var tag = ""
 exports.run=(client,message,cmd)=>{
-	if(cmd.split(' ')[1]==='lewd'){
+	if(message.split(' ')[1]==='lewd'){
 		lewd=true
 		tag='lewd'
 	}
