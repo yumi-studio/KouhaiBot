@@ -15,6 +15,7 @@
     "pngjs-draw": "0.0.6",
     "redis": "^2.8.0",
     "request": "2.81.0",
+    "string-to-dom": "^0.1.5",
     "ytdl-core": "^0.20.3"
   }
 }
