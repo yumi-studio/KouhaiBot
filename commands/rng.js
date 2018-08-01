@@ -8,7 +8,7 @@ exports.run=(client,message,args)=>{
         case 's':
             try {
                 arr = x[1].split('-')
-                res = process(arr[0],arr[1])
+                res = proc(arr[0],arr[1])
                 message.channel.send(`Result: ${res}`)
             } catch (error) {
                 console.log()
@@ -18,7 +18,7 @@ exports.run=(client,message,args)=>{
             try {
                 arr = x[2].split('-')
                 while(x[1]!=0){
-                    res+=process(arr[1],arr[2])+" "
+                    res+=proc(arr[1],arr[2])+" "
                     x[1]--
                 }
                 message.channel.send(res)
@@ -29,7 +29,7 @@ exports.run=(client,message,args)=>{
         default:
     }
 
-    function process(x,y){
+    function proc(x,y){
         return Math.floor(Math.random()*(y+1-x))+x
     }
 }
