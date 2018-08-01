@@ -29,7 +29,7 @@ exports.run=(client,message,args)=>{
         default:
     }
 
-    function proc(x,y){
-        return Math.floor(Math.random()*(y+1-x))+x
+    function proc(a,b){
+        return Math.floor(Math.random()*(b+1-a))+a
     }
 }
