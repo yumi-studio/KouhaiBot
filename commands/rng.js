@@ -18,7 +18,7 @@ exports.run=(client,message,args)=>{
             try {
                 arr = x[2].split('-')
                 while(x[1]!=0){
-                    res+=proc(arr[1],arr[2])+" "
+                    res+=proc(arr[0],arr[1])+" "
                     x[1]--
                 }
                 message.channel.send(res)
