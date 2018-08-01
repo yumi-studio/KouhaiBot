@@ -11,7 +11,7 @@ exports.run=(client,message,args)=>{
                 res = proc(arr[0],arr[1])
                 message.channel.send(`Result: ${res}`)
             } catch (error) {
-                console.log()
+                console.log("rng error:\n"+error)
             }
             return
         case 'm':
@@ -30,6 +30,8 @@ exports.run=(client,message,args)=>{
     }
 
     function proc(a,b){
+        a = parseInt(a)
+        b = parseInt(b)
         return Math.floor(Math.random()*(b+1-a))+a
     }
 }
