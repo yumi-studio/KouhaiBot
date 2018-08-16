@@ -130,5 +130,13 @@ client.on('message', message=>{
 // 		});
 // 	})
 // })
+client.on('message',message=>{
+	let mt = message.mentions.members
+	if(mt===undefined || message.author.bot) return
+	if(mt.get(process.env.BOSS_ID)!==undefined){
+		if(mt.get(process.env.BOSS_ID).presence.status==='offline' || mt.get(process.env.BOSS_ID).presence.status==='dnd')
+		message.channel.send(`Yui-senpai is busy. DO NOT DISTURB MY LOVELY SENPAI, ${message.author}-san`)
+	}
+})
 
 client.login(process.env.BOT_TOKEN);
