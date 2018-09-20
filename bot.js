@@ -24,7 +24,7 @@ client.on('ready', () => {
 		url:'https://yumichannel.github.io/discord',
 		type: 'WATCHING'
 	});
-	console.log('bot is ready');
+	client.guilds.get('201913926848479232').channels.get('486774457596116992').send('KouhaiBot is online!')
 });
 
 client.on('guildMemberAdd',member=>{
