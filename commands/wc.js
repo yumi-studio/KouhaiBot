@@ -9,7 +9,7 @@ exports.run = (client,message,cmd) =>{
     let channel = message.channel;
     let sender = message.author;
     let list=[];
-    if(sender.id!==process.env.BOSS_ID && message.member.permissions.FLAGS!=="MANAGE_GUILD") return;
+    if(sender.id!=process.env.BOSS_ID && message.member.permissions.toArray().indexOf("ADMINISTRATOR")==-1) return;
     rdc.get("welcome"+guild.id,(err,reply)=>{
         if(reply!==null){
             list = JSON.parse(reply.toString());
