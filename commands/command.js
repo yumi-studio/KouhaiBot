@@ -11,11 +11,11 @@ exports.run = (client,message,cmd) =>{
 	let pos
 	switch(arg1){
 		case "list":
-			rdc.get("cmd"+guild.id,function(err,reply){
-				if(reply===null)	return;
-				list=JSON.parse(reply.toString());
+			rdc.get("custom",function(err,reply){
+				list = JSON.parse(reply.toString());
+				pos = list.findIndex(m=>m.id==guild.id);
 				let listname ="";
-				list.forEach(m => {listname=listname + ", "+m.name});
+				list[pos].list.forEach(m => {listname=listname + ", "+m.name});
 				listname=listname.substring(2);
 				if(listname.length<1){
 					channel.send("No custom command.");
@@ -38,7 +38,7 @@ exports.run = (client,message,cmd) =>{
 				return
 			}
 		}
-		rdc.get("command",function(err,reply){
+		rdc.get("custom",function(err,reply){
 			list = JSON.parse(reply.toString());
 			let newc = {
 				name: arg1, 
@@ -53,7 +53,7 @@ exports.run = (client,message,cmd) =>{
 				list[pos].list.splice(found,1,newc);
 				channel.send("`"+arg1+"` is modified.");
 			}
-			rdc.set("command",JSON.stringify(list),()=>{});
+			rdc.set("custom",JSON.stringify(list),()=>{});
 		});
 	}
 
@@ -63,13 +63,13 @@ exports.run = (client,message,cmd) =>{
 				return
 			}
 		}
-		rdc.get("command",function(err,reply){
+		rdc.get("custom",function(err,reply){
 			list = JSON.parse(reply.toString());
 			pos = list.findIndex(m=>m.id==guild.id)
 			let found = list[pos].list.findIndex(m=>m.name==arg1);
 			if(found==-1) return;
 			list[pos].list.splice(found,1);
-			rdc.set("command",JSON.stringify(list),()=>{
+			rdc.set("custom",JSON.stringify(list),()=>{!
 				channel.send("`"+arg1+"` is deleted.");
 			});
 		});
