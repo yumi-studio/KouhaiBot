@@ -38,7 +38,7 @@ exports.run = (client,message,cmd) =>{
                 return
             case "del": //delete single
                 try {
-                    list[pos].list.splice(wcmsg,1)
+                    list[pos].list.splice(opt,1)
                     rdc.set("welcome",JSON.stringify(list),()=>{
                         channel.send("Deleted a greeting message!")
                     })
