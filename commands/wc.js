@@ -3,8 +3,8 @@ const rdc = require('redis').createClient(process.env.REDIS_URL)
 
 exports.run = (client,message,cmd) =>{
     if(cmd.lenght<=0) return
-    let opt = cmd.split(" ")
-    let wcmsg = opt[1]
+    let opt = cmd.split(" ")[0]
+    let wcmsg = opt.splice(0,1).join(" ")
     let guild = message.guild
     let channel = message.channel
     let sender = message.author
