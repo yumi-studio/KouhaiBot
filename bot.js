@@ -27,6 +27,30 @@ client.on('ready', () => {
 	client.guilds.get('201913926848479232').channels.get('486774457596116992').send('KouhaiBot is online!');
 });
 
+client.on("guildCreate",guild=>{
+	let channel = guild.channels.find(c=>{
+		return c.type==="text" && c.permissionsFor(guild.me).has("SEND_MESSAGES");
+	})
+	if(channel===null) return
+	channel.send("Hello, KouhaiBot is here! <3")
+	rdc.get("welcome",(err,reply)=>{
+		let list = JSON.parse(reply.toString());
+		list.push({
+			id : guild.id,
+			list: []
+		})
+		rdc.set("welcome",JSON.stringify(list),()=>{})
+	});
+	rdc.get("command",(err,reply)=>{
+		let list = JSON.parse(reply.toString());
+		list.push({
+			id : guild.id,
+			list: []
+		})
+		rdc.set("command",JSON.stringify(list),()=>{})
+	});
+})
+
 client.on('guildMemberAdd',member=>{
 	if(member.bot) return;
 	let guild = member.guild;
@@ -35,7 +59,7 @@ client.on('guildMemberAdd',member=>{
 	})
 	if(channel===null) return;
 	rdc.get("welcome",(err,reply)=>{
-		if(reply.find===null){
+		if(reply===null){
 			channel.send(`Have a great day, ${member} senpai`);
 			return;	
 		}
@@ -146,8 +170,12 @@ client.on('message',message=>{
 	if(mt===undefined || message.author.bot) return
 	if(mt.get(process.env.BOSS_ID)!==undefined){
 		if(mt.get(process.env.BOSS_ID).presence.status==='offline' || mt.get(process.env.BOSS_ID).presence.status==='dnd')
-		message.channel.send(`Yui-senpai is busy. DO NOT DISTURB MY LOVELY SENPAI, ${message.author}-san`)
+		message.channel.send(`Yui-senpai is busy. DO NOT DISTURB MY SENPAI, ${message.author}-san`)
 	}
+})
+
+client.on("error",err=>{
+	console.log(err)
 })
 
 client.login(process.env.BOT_TOKEN);
