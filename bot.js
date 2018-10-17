@@ -84,7 +84,7 @@ client.on('message', message => {
 		cmdFile.run(client,message,args);
 	}catch(err){
 		/*Read custom commands */
-		rdc.get("command",function(err,reply){
+		rdc.get("custom",function(err,reply){
 			let list = JSON.parse(reply.toString());
 			let pos = list.findIndex(m=>m.id==message.guild.id)
 			if(pos==-1) return
