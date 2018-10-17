@@ -6,9 +6,9 @@ exports.run = (client,message,cmd) =>{
 	let arg1 = cmd.split(" ")[0];
 	let arg2 = cmd.substring(arg1.length+1);
 	let sender = message.author;
-	let perm =  message.member.permissions.FLAGS;
 	let guild = message.guild;
 	let channel = message.channel;
+	let pos
 	switch(arg1){
 		case "list":
 			rdc.get("cmd"+guild.id,function(err,reply){
@@ -33,35 +33,43 @@ exports.run = (client,message,cmd) =>{
 	}
 
 	function set(){
-		if(sender.id!==process.env.BOSS_ID && perm!=="ADMINISTRATOR") return;
-		rdc.get("cmd"+guild.id,function(err,reply){
-			if(reply===null) return;
+		if(sender.id!=process.env.BOSS_ID){
+			if(!message.member.permissions.hasPermission("ADMINISTRATOR")){
+				return
+			}
+		}
+		rdc.get("command",function(err,reply){
 			list = JSON.parse(reply.toString());
 			let newc = {
 				name: arg1, 
 				content: arg2
 			}
-			let found = list.findIndex(m=>m.name===newc.name);
-			if(found===-1){
-				list.push(newc);
+			pos = list.findIndex(m=>m.id==guild.id);
+			let found = list[pos].list.findIndex(m=>m.name==newc.name)
+			if(found==-1){
+				list[pos].list.push(newc);
 				channel.send("`"+arg1+"` is added.");
 			}else{
-				list.splice(found,1,newc);
+				list[pos].list.splice(found,1,newc);
 				channel.send("`"+arg1+"` is modified.");
 			}
-			rdc.set("cmd"+guild.id,JSON.stringify(list),()=>{});
+			rdc.set("command",JSON.stringify(list),()=>{});
 		});
 	}
 
 	function del(){
-		if(sender.id!==process.env.BOSS_ID && perm!=="ADMINISTRATOR") return;
-		rdc.get("cmd"+guild.id,function(err,reply){
-			if(reply===null) return;
+		if(sender.id!=process.env.BOSS_ID){
+			if(!message.member.permissions.hasPermission("ADMINISTRATOR")){
+				return
+			}
+		}
+		rdc.get("command",function(err,reply){
 			list = JSON.parse(reply.toString());
-			let found = list.findIndex(m=>m.name===arg1);
-			if(found===-1) return;
-			list.splice(found,1);
-			rdc.set("cmd"+guild.id,JSON.stringify(list),()=>{
+			pos = list.findIndex(m=>m.id==guild.id)
+			let found = list[pos].list.findIndex(m=>m.name==arg1);
+			if(found==-1) return;
+			list[pos].list.splice(found,1);
+			rdc.set("command",JSON.stringify(list),()=>{
 				channel.send("`"+arg1+"` is deleted.");
 			});
 		});

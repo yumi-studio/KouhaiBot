@@ -84,10 +84,11 @@ client.on('message', message => {
 		cmdFile.run(client,message,args);
 	}catch(err){
 		/*Read custom commands */
-		rdc.get("cmd"+message.guild.id,function(err,reply){
-			if(reply===null) return;
-			let custom = JSON.parse(reply.toString());
-			let found = custom.find(m=> m.name===cmd);
+		rdc.get("command",function(err,reply){
+			let list = JSON.parse(reply.toString());
+			let pos = list.findIndex(m=>m.id==message.guild.id)
+			if(pos==-1) return
+			let found = list[pos].list.find(m=> m.name==cmd);
 			let em = new Discord.RichEmbed();
 			if(found!==undefined){
 				if(found.content.startsWith("https://") || found.content.startsWith("http://")){
