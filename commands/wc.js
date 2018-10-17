@@ -4,6 +4,7 @@ const rdc = require('redis').createClient(process.env.REDIS_URL)
 exports.run = (client,message,cmd) =>{
     if(cmd.lenght<=0) return
     let opt = cmd.split(" ")
+    let option = opt[0]
     let wcmsg = opt.splice(0,1).join(" ")
     let guild = message.guild
     let channel = message.channel
@@ -21,7 +22,7 @@ exports.run = (client,message,cmd) =>{
         }
         pos = list.findIndex(m=>m.id==guild.id)
         if(pos==-1) return
-        switch(opt[0]){
+        switch(option){
             case "add": //add new
                 if(wcmsg.lenght<=0) return
                 list[pos].list.push(wcmsg)
