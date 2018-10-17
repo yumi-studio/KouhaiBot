@@ -59,17 +59,19 @@ client.on('guildMemberAdd',member=>{
 	})
 	if(channel===null) return;
 	rdc.get("welcome",(err,reply)=>{
-		if(reply===null){
+		let list = JSON.parse(reply.toString());
+		let pos = list.findIndex(m=>m.id==guild.id)
+		if(pos==-1) return
+		let num = list[pos].list.length
+		if(num<1){
 			channel.send(`Have a great day, ${member} senpai`);
 			return;	
-		}
-		let list = JSON.parse(reply.toString());
-		let num = list.length;
-		if(num>0){
+		}else{
 			num = Math.floor(Math.random()*num);
-			let x = list[num].replace("@user",`<@${member.id}>`);
+			let x = list[pos].list[num].replace("@user",`<@${member.id}>`);
 			channel.send(x);
 		}
+			
 	});
 });
 
