@@ -5,7 +5,7 @@ exports.run = (client,message,cmd) =>{
     if(cmd.lenght<=0) return
     let opt = cmd.split(" ")
     let option = opt[0]
-    let wcmsg = opt.splice(0,1).join(" ")
+    opt.splice(0,1).join(" ")
     let guild = message.guild
     let channel = message.channel
     let sender = message.author
@@ -24,8 +24,8 @@ exports.run = (client,message,cmd) =>{
         if(pos==-1) return
         switch(option){
             case "add": //add new
-                if(wcmsg.lenght<=0) return
-                list[pos].list.push(wcmsg)
+                if(opt.lenght<=0) return
+                list[pos].list.push(opt)
                 rdc.set("welcome",JSON.stringify(list),()=>{
                     channel.send("Added new greeting message! Check greeting list with **!wc list**")
                 })
