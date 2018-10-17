@@ -24,7 +24,7 @@ client.on('ready', () => {
 		url:'https://yumichannel.github.io/discord',
 		type: 'WATCHING'
 	});
-	client.guilds.get('201913926848479232').channels.get('486774457596116992').send('KouhaiBot is online!')
+	client.guilds.get('201913926848479232').channels.get('486774457596116992').send('KouhaiBot is online!');
 });
 
 client.on('guildMemberAdd',member=>{
@@ -34,8 +34,8 @@ client.on('guildMemberAdd',member=>{
 		return c.type==="text" && c.permissionsFor(guild.me).has("SEND_MESSAGES");
 	})
 	if(channel===null) return;
-	rdc.get("welcome"+guild.id,(err,reply)=>{
-		if(reply===null){
+	rdc.get("welcome",(err,reply)=>{
+		if(reply.find===null){
 			channel.send(`Have a great day, ${member} senpai`);
 			return;	
 		}
